@@ -1,0 +1,38 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "orderFrontFontPanel:"
+	);
+	Super = NSObject;
+    };
+    ServerEditorController = {
+	Actions = (
+	    "setConnect:",
+	    "setCommands:",
+	    "setPort:",
+	    "setServer:",
+	    "setUser:",
+	    "setPassword:",
+	    "setReal:",
+	    "setNick:",
+	    "setEntry:"
+	);
+	Outlets = (
+	    connectButton,
+	    commandsField,
+	    portField,
+	    serverField,
+	    userField,
+	    realField,
+	    passwordField,
+	    extraField,
+	    okButton,
+	    entryField,
+	    window,
+	    nickField,
+	    commandsText
+	);
+	Super = NSObject;
+    };
+}

@@ -1,0 +1,29 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    BundlePreferencesController = {
+	Actions = (
+	    "showingSelected:"
+	);
+	Outlets = (
+	    preferencesView,
+	    descriptionText,
+	    availableTable,
+	    loadedTable,
+	    showingPopUp
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "showingSelected:"
+	);
+	Super = NSObject;
+    };
+    NewClass = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSObject;
+    };
+}

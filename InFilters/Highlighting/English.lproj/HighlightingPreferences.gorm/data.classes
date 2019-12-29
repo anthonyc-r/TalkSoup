@@ -1,0 +1,33 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "orderFrontFontPanel:",
+	    "highlightingHit:",
+	    "removeHit:",
+	    "highlightInChannelHit:",
+	    "highlightInTabHit:",
+	    "messageInTabHit:"
+	);
+	Super = NSObject;
+    };
+    HighlightingPreferencesController = {
+	Actions = (
+	    "highlightingHit:",
+	    "removeHit:",
+	    "highlightInChannelHit:",
+	    "highlightInTabHit:",
+	    "messageInTabHit:"
+	);
+	Outlets = (
+	    highlightButton,
+	    removeButton,
+	    extraTable,
+	    window,
+	    highlightInChannelColor,
+	    highlightInTabColor,
+	    messageInTabColor
+	);
+	Super = NSObject;
+    };
+}

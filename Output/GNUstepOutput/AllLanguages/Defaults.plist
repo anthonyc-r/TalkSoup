@@ -1,0 +1,17 @@
+{
+	BackgroundColor = "IRCColorCustom 1000 973 863";
+	OtherBracketColor = "IRCColorCustom 0 0 1000";
+	PersonalBracketColor = "IRCColorCustom 1000 0 0";
+	TextColor = "IRCColorCustom 0 0 0";
+	BufferLines = 1000;
+	WrapIndent = "0.0";
+	DefaultQuitMessage = "[TalkSoup] Get it today: http://gap.nongnu.org/talksoup/";
+
+	Aliases = {
+		j = "/join";
+		charset = "/encoding";
+		p = "/part";
+		q = "/quit";
+		c = "/close";
+	};
+}

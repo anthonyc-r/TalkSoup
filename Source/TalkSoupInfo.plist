@@ -1,0 +1,25 @@
+{
+    	NSIcon = "TalkSoup.tiff";
+	ApplicationDescription = "An IRC Client for GNUstep and Mac OS X";
+    	ApplicationName = TalkSoup;
+    	ApplicationRelease = "1.1";
+    	ApplicationURL = "http://gap.nongnu.org/talksoup/";
+    	URL = "http://gap.nongnu.org/talksoup/";
+    	Authors = (
+                "Andrew Ruder <aeruder@ksu.edu>",
+                "The GNUstep Application Team"
+        );
+    	Copyright = "Copyright \u00a9 2005 Andrew Ruder\n 2013-2015 GNUstep Application Project ";
+    	CopyrightDescription = "Released under the GNU GPLv2 or later.";
+    	FullVersionID = "1.1";
+	CFBundleExecutable = "TalkSoup";
+	CFBundleGetInfoString = "1.1, Copyright \u00a9 2005 Andrew Ruder, 2013-2015 GNUstep Application Project";
+	CFBundleIconFile = "TalkSoup.tiff";
+	CFBundleIdentifier = "net.aeruder.talksoup";
+	CFBundleInfoDictionaryVersion = "6.0";
+	CFBundleName = "TalkSoup";
+	CFBundlePackageType = "APPL";
+	CFBundleShortVersionString = "1.1";
+	CFBundleSignature = "TSup";
+	CFBundleVersion = "1.1";
+}

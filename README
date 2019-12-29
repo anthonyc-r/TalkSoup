@@ -1,0 +1,317 @@
+TalkSoup is a fully-featured IRC client written with the GNUstep framework
+
+===============================================================================
+Copyright (C) 2003 Andy Ruder
+          (C) 2013-2015 The GNUstep Application Project
+
+  TalkSoup is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+Comments are welcome.
+===============================================================================
+
+****************************************************************
+* netclasses MUST be installed before installation of TalkSoup *
+****************************************************************
+
+**** Please see README.osx for instructions dealing with OS X compilation ****
+
+============================
+Compilation/Installation/Use
+============================
+
+1. Compile and install TalkSoup
+ andy ~/TalkSoup $ make
+ andy ~/TalkSoup $ su -c 'make install'
+
+2. Run TalkSoup
+ andy ~ $ gopen TalkSoup.app 
+  
+Enjoy!  Read below for more information about what you've just installed
+and are running :)
+
+===========
+Description
+===========
+TalkSoup.app is a fully-featured IRC client which uses GNUstep base.  While
+TalkSoup.app itself is just a very basic core which can simply pass messages
+between bundles (plugins), there are many bundles which make up the
+functionality.
+
+This distribution comes with:
+
+Input Plugins:
+
+  *NetclassesInput: an input plugin based on netclasses
+
+Output Plugins:
+
+  *GNUstepOutput: an output plugin based on gnustep-gui
+
+Input Filters:
+  
+  *Highlighting: highlights keywords and nicknames and 
+    handles highlighting tabs as well.  See the /highlighting
+    command for configuration options. (Bundle must be loaded)
+
+  *KeepAlive: sends a ping to the server every three minutes
+    on every connection to keep you connected
+  
+  *DCCSupport: allows files to be sent and received from client
+    to client.  There is no DCC chat support and probably never
+    will be.  See /dcc command once the bundle is loaded for
+    more information.
+
+  Logging: allows a log of a connection to be made.  See the
+    /logging command for more information (once the bundle
+    is loaded).  Also see FAQ question 3.5 on using the logging
+    support.
+  
+  MessageInTab: opens a new tab when someone private
+    messages you
+
+  Decolorizer: removes colors from incoming messages.
+
+  Debold: removes bold from incoming messages
+
+  Deunderline: removes underlining from incoming messages
+  
+Output Filters:
+
+  *Colorizer: Lets you use %B for bold, %U for underline,
+    %R for reverse, %O for clear all attributes, and 
+    %C(0-15),(0-15) to set colors. (First number is the 
+    foreground color, second number is the background color).
+
+  Piper: Lets you pipe outgoing messages through arbitrary
+    commands. See the /piper command when the bundle is loaded
+    to configure.
+
+* == Used by default
+
+========
+Commands
+========
+/load <in/out> <bundle>: 
+  Loads a input/output filter bundle named <bundle>.  If that bundle
+  is already loaded, it will move it to the end of the list.
+
+/unload <in/out> <bundle>:
+  Unloads a input/output filter bundle named <bundle>
+
+/loaded :
+  Shows what bundles are currently loaded
+
+/saveloaded :
+  Saves the currently loaded bundles to the defaults so that
+  the same ones will be loaded upon the next startup of 
+  TalkSoup.app
+
+/join <channel1>[,channel2,...] [password1[,password2,...]]
+  Joins a channel (optionally 2 or more channels separated
+  by commas with no space) with an optional password (or
+  if there are multiple channels specified, then multiple
+  passwords separated only by a comma)
+
+/nick <nick>
+  Changes your nickname to <nick>
+
+/msg <nick> <message>
+  Sends the private message <message> to the person named <nick>
+
+/quit <message>
+  Disconnects you from the currently connected IRC server.  If 
+  <message> is specified, it will use that as the quit message.
+
+/notice <nick> <message>
+  Sends the private notice <message> to the person named <nick>
+  Most of the time, you should send people regular messages using
+  the /msg command.  However, in certain cases, you may want to
+  use a notice instead.
+
+/away <message>
+  This command sets your away message if <message> is specified.  If you
+  don't specify <message>, it will mark you as back.
+
+/colors
+  This simply explains to you the valid colors that other commands may
+  ask you to use.
+
+/ctcp <nick> <ctcp> [args]
+  Sends the ctcp command <ctcp> with optional arguments [args] to
+  the person with the nick <nick>.  CTCP messages are used for a
+  lot of extensions to IRC such as DCC and getting information
+  from another person's IRC client.
+
+/version <nick>
+  This is a sortcut for /ctcp <nick> VERSION, which, on most
+  IRC clients, will return the person named <nick>'s IRC client 
+  and version.
+
+/clientinfo <nick>
+  This is a shortcut for /ctcp <nick> CLIENTINFO, which, on
+  most IRC clients, will return information on getting the
+  IRC client that the person named <nick> is using.
+
+/ping <nick> <argument>
+  This is a shortcut for /ctcp <nick> PING <argument>.  With
+  most IRC clients, the other client will respond immediately
+  with a PING CTCP message with the same argument.  You can
+  use this to see how lagged you are.
+
+/userinfo <nick>
+  This is a shortcut for /ctcp <nick> USERINFO.  On some
+  IRC clients this will respond with information about the
+  user named <nick>.
+
+/topic <channel> [topic]
+  This will set <channel>'s topic to [topic].  If [topic] is
+  not specified, it will refresh the channel's topic.
+
+/kick <channel> <user> [comment]
+  This will kick the specified <user> out of a <channel>.  If
+  [comment] is specified, it will be displayed to the user
+  instead of the default message.
+
+/raw <message>
+  This command will send <message> to the server as it is, 
+  no formatting or command substitution will take place on
+  the string.
+
+/encoding <encoding>
+  This command changes the encoding for incoming and
+  outgoing messages on that particular connection.  By not
+  specifying <encoding> the command will list the available
+  encodings.
+
+==============================================================
+Commands specific to the GNUstep output plugin (GNUstepOutput)
+==============================================================
+
+/me <action>
+  Sends an action to the channel, for example:
+  
+    /me runs around the channel screaming 'GNUstep rules'
+  
+  would print * <nick> runs around the channel screaming 'GNUstep rules'
+
+/query <nick>
+  Opens a new tab for a person named <nick>.  All of their private 
+  messages will appear in there, and typing to the person in that tab
+  will send them private messages.
+
+/server <server> [port]
+  Disconnects from current server and connects to <server>.  If
+  [port] is unspecified, it defaults to 6667.
+
+/close [name]
+  This closes the tab named [name].  If you don't specify the name, it will
+  close the current tab.
+
+/clear
+  Clears the text in the current tab.
+
+/scrollback <lines>
+  This sets how many lines are in the scroll-back buffer.
+  This change will automatically be saved to the defaults.
+
+/ping <person>
+  Good way to find out the lag between you and that person.
+
+/topic [topic]
+  This will set the current channel's topic to [topic].  If [topic] is
+  not specified, the topic for the channel will be displayed.
+
+/exec [-o] command
+  This will execute command and display it's output.  If -o is specified,
+  the output will actually be sent to the current channel/query.
+
+/alias <alias> <command>
+  Alias a command to another command.  For example,
+
+  /alias j /join
+
+  This will make /j the same as /join.
+
+  /alias hi hello everybody!!!!
+
+  This will make /hi send "hello everybody!!!!" to the channel/query.
+
+/unalias <alias>
+  Unset an alias set with the /alias command.
+  
+===================================
+Notes about GNUstepOutput (default)
+===================================
+  
+  * Double clicking a person in the user list in a channel will
+    open a query tab for them.
+  
+  * See the 'Bundle Setup' to configure loaded bundles.  Some of the 
+    bundles even provide nice GUIs for configuration.
+	
+===============================================================================
+The FAQ (Frequently Asked Questions) also covers many common questions
+that TalkSoup users have.
+===============================================================================
+
+=======
+Authors
+=======
+  Original author: Andrew Ruder <aeruder at ksu dot edu>
+
+  Riccardo Mottola (rm at gnu dot org)
+       Import into GAP, extensive code cleanup and modernization. New native MacOS port
+
+==============
+Special Thanks
+==============
+  Luis Garcia Alanis <luis.garcia at mac.com>
+	For his initial drive to make a GNUstep IRC client using netclasses and his
+	first version of Charla.app
+  Alex Perez <aperez at student.santarosa.edu>
+	For his immense testing efforts and all his suggestions and he also drew
+	the icon that is currently being used by the GNUstep output plugin right
+	now.  Alex is also one of the primary people behind making the original OS
+	X port possible.
+  Jeff Reinecke
+	Jeff provided the machine that the port was done on.  Using solely VNC and
+	SSH into his machine, the very first TalkSoup OS X was made possible.
+	Thanks a ton Jeff!!!!
+  Lyndon Tremblay <humasect at shaw.ca>
+	For his time and effort in both testing and making TalkSoup an icon.
+  Gregory Casemento <greg_casamento at yahoo.com>
+	For his tremendous work on Gorm, which made TalkSoup possible.
+  Alexander Malmberg <alexander at malmberg.org>
+	For his constant help, bug-fixes, and overall contributions to the GNUstep
+	project. 
+  Matt Rice:
+    He knows something about everything; a constant source of advice and help
+	during the development of TalkSoup.
+  Aaron Glenn:
+    Actually made several of the new TalkSoup OS X nibs with me explaining
+	(over IRC, of course) how to make them.  (He was unfamiliar with 
+	using Interface Builder).  Without this guy, it's unlikely I would have
+	ever gotten started on the new TalkSoup OS X port.
+  
+  Also, a big thanks goes out to: Nicolas Roard, Thom Cherryhomes, Tim
+  Harrison, Ian Jones, and all the other people I probably forgot about who
+  offered bug fixes, suggestions, and just took the time to compile and use
+  TalkSoup.
+    
+===============================================================================
+Copyright (C) 2003 by Andy Ruder
+
+http://gap.nongnu.org/talksoup
+	

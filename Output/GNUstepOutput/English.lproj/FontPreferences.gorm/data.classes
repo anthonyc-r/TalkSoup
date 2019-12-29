@@ -1,0 +1,29 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "hitFontButton:",
+	    "setWrapIndent:"
+	);
+	Super = NSObject;
+    };
+    FontPreferencesController = {
+	Actions = (
+	    "hitFontButton:",
+	    "setWrapIndent:"
+	);
+	Outlets = (
+	    preferencesView,
+	    userFontButton,
+	    chatFontButton,
+	    chatFontField,
+	    userFontField,
+	    fontSetView,
+	    boldFontButton,
+	    boldFontField,
+	    wrapIndentStepper,
+	    wrapIndentField
+	);
+	Super = NSObject;
+    };
+}

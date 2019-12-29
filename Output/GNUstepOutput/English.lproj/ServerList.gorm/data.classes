@@ -1,0 +1,32 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "orderFrontFontPanel:",
+	    "forceHit:"
+	);
+	Super = NSObject;
+    };
+    ServerListController = {
+	Actions = (
+	    "editHit:",
+	    "connectHit:",
+	    "addGroupHit:",
+	    "removeHit:",
+	    "addEntryHit:",
+	    "forceHit:"
+	);
+	Outlets = (
+	    connectButton,
+	    addGroupButton,
+	    removeButton,
+	    editButton,
+	    scrollView,
+	    window,
+	    addEntryButton,
+	    browser,
+	    forceButton
+	);
+	Super = NSObject;
+    };
+}

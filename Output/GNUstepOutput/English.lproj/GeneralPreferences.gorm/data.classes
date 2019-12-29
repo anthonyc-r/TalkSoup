@@ -1,0 +1,23 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "setText:"
+	);
+	Super = NSObject;
+    };
+    GeneralPreferencesController = {
+	Actions = (
+	    "setText:"
+	);
+	Outlets = (
+	    preferencesView,
+	    userView,
+	    nameView,
+	    passwordView,
+	    nickView,
+	    quitView
+	);
+	Super = NSObject;
+    };
+}

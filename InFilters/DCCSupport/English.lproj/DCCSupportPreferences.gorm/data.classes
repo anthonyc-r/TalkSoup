@@ -1,0 +1,31 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    DCCSupportPreferencesController = {
+	Actions = (
+	    "changeCompletedHit:",
+	    "changeDownloadHit:",
+	    "blockSizeHit:",
+	    "portRangeHit:"
+	);
+	Outlets = (
+	    blockSizeField,
+	    portRangeField,
+	    changeCompletedButton,
+	    changeDownloadButton,
+	    changeCompletedField,
+	    changeDownloadField,
+	    window
+	);
+	Super = NSObject;
+    };
+    FirstResponder = {
+	Actions = (
+	    "orderFrontFontPanel:",
+	    "changeCompletedHit:",
+	    "changeDownloadHit:",
+	    "blockSizeHit:",
+	    "portRangeHit:"
+	);
+	Super = NSObject;
+    };
+}

@@ -1,0 +1,41 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "orderFrontFontPanel:"
+	);
+	Super = NSObject;
+    };
+    FocusNotificationTextView = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSTextView;
+    };
+    InputControllerTextView = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = FocusNotificationTextView;
+    };
+    KeyTextView = {
+	Actions = (
+	);
+	Outlets = (
+	);
+	Super = NSTextView;
+    };
+    TabMasterController = {
+	Actions = (
+	);
+	Outlets = (
+	    tabView,
+	    nickView,
+	    typeView,
+	    window
+	);
+	Super = NSObject;
+    };
+}

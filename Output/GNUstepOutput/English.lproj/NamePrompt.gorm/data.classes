@@ -1,0 +1,19 @@
+{
+    "## Comment" = "Do NOT change this file, Gorm maintains it";
+    FirstResponder = {
+	Actions = (
+	    "orderFrontFontPanel:"
+	);
+	Super = NSObject;
+    };
+    NamePromptController = {
+	Actions = (
+	    "returnHit:"
+	);
+	Outlets = (
+	    typeView,
+	    window
+	);
+	Super = NSObject;
+    };
+}

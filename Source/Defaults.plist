@@ -1,0 +1,20 @@
+{
+	Nick = "TalkSoup";
+	Password = "";
+	Plugins = 
+	{
+	    InFilters = (
+		Highlighting.bundle,
+		KeepAlive.bundle,
+		DCCSupport.bundle,
+		MessageInTab.bundle
+	    );
+	    Input = NetclassesInput.bundle;
+	    OutFilters = (
+		Colorizer.bundle
+	    );
+	    Output = GNUstepOutput.bundle;
+	};
+	RealName = "";
+	UserName = "";
+}

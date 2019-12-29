@@ -1,0 +1,555 @@
+2015-03-08 Riccardo Mottola <rm@gnu.org>
+
+	* TalkSoupBundles/Functions.m
+	* TalkSoupBundles/TalkSoupMisc.h
+	Wildcard matching additions.
+
+	* InFilters/Ignore/GNUmakefile
+	* InFilters/Ignore/GNUmakefile.preamble
+	* InFilters/Ignore/Ignore-Info.plist
+	* InFilters/Ignore/Ignore.h
+	* InFilters/Ignore/Ignore.m
+	Imported (from old git repo) and adapted IGNORE plugin
+
+2015-03-01 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	If aMessage is empty, do not print it at all (fixes crash)
+
+	* TalkSoupBundles/Functions.m
+	If one of the arguments is nil, do not crash but insert an empty string.
+
+2015-02-25 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	I no name is entered, do not do anyything instead of closing the panel.
+
+2015-02-25 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/DCCTransfer.h
+	* InFilters/DCCSupport/DCCTransfer.m
+	* InFilters/DCCSupport/DCCSender.h
+	* InFilters/DCCSupport/DCCSender.m
+	* InFilters/DCCSupport/DCCGetter.h
+	* InFilters/DCCSupport/DCCGetter.m
+	* InFilters/DCCSupport/DCCObject.h
+	* InFilters/DCCSupport/DCCObject.m
+	new DCCTransfer superclass for DCCSender and DCCGetter, further cleanup
+
+2015-02-25 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/Highlighting/Highlighting.m
+	Local variable with explicit type, substitute GS macro
+
+	* InFilters/Highlighting/HighlightingPreferencesController.h
+	Declare local protocol for < 10.6
+
+2015-02-24 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Tools/dns_helper.m
+	Look for all addresses for the first IPv4 looking one
+
+2015-02-24 Riccardo Mottola <rm@gnu.org>
+
+	* TalkSoupBundles/Functions.m
+	* TalkSoupBundles/TalkSoupMisc.h
+	* InFilters/DCCSupport/DCCSupport.m
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	* Output/GNUstepOutput/Controllers/InputController.m
+	* Source/commands.m
+	Explicit return types to NSArray.
+
+2015-02-23 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/Preferences/BundlePreferencesController.m
+	Do not set description if nil.
+
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardContentController.m
+	Create AttStr directly.
+
+	* InFilters/DCCSupport/DCCSupport.m
+	* InFilters/DCCSupport/DCCSupport.h
+	Explicit parameter type.
+
+2015-02-22 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/English.lproj/GeneralPreferences.gorm
+	Fields send action ond editing end, resize heights to standard.
+
+2015-02-21 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/DCCGetter.m
+	* InFilters/DCCSupport/DCCObject.m
+	* InFilters/DCCSupport/DCCSender.m
+	* InFilters/DCCSupport/DCCSupport.m
+	* InFilters/DCCSupport/DCCSupportPreferencesController.m
+	Replaced GS macros
+
+2015-02-20 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/main.m
+	* Input/NetclassesInput/main.h
+	Explicit return types
+
+	* Input/NetclassesInput/main.m
+	Fix memory leak
+
+	* Output/GNUstepOutput/Models/Channel.m
+	Allocate mutable string directly for line terminator.
+
+
+2015-02-19 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Tools/dns_helper.m
+	Remove unused header, remove GS memory macros.
+
+	* Output/GNUstepOutput/Misc/HelperExecutor.m
+	Handle executable placement on Mac.
+
+2015-02-19 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/main.m
+	Fix memory leak.
+
+	* Output/GNUstepOutput/GNUstepOutput.m
+	Remove unused variables and code setting them.
+
+2015-02-17 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Models/Channel.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardContentController.m
+	* Output/GNUstepOutput/Controllers/Preferences/PreferencesController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Misc/NSAttributedStringAdditions.m
+	* Output/GNUstepOutput/Misc/LookedUpHost.m
+	Explicit types and protocols.
+
+2015-02-16 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/Functions.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/ContentController.h
+	* Output/GNUstepOutput/Controllers/InputController.m
+	* Output/GNUstepOutput/Controllers/ServerListConnectionController.m
+	* Output/GNUstepOutput/Controllers/ServerListController.h
+	* Output/GNUstepOutput/Controllers/ServerListController.m
+	* TalkSoupBundles/Functions.m
+	Import headers, use explicit types instead of id to avoid wrong signatures.
+
+	* Output/GNUstepOutput/GNUstepOutput.m
+	Remove variable set but not used.
+
+2015-02-16 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/Highlighting/HighlightingPreferencesController.h
+	* InFilters/Highlighting/HighlightingPreferencesController.m
+	Import and follow NSTableViewDelegate protocol
+
+2015-02-15 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	Remove unused variable and assignment.
+
+2015-02-15 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/Functions.m
+	* Input/NetclassesInput/NetclassesInputSendThenDieTransport.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Controllers/GroupEditorController.m
+	* Output/GNUstepOutput/GNUstepOutput.m
+	* TalkSoupBundles/Encodings.m
+	* TalkSoupBundles/Functions.m
+	* TalkSoupBundles/TalkSoup.h
+	* TalkSoupBundles/TalkSoup.m
+	* Output/GNUstepOutput/Controllers/NamePromptController.m
+	* Output/GNUstepOutput/Controllers/InputController.m
+	* Output/GNUstepOutput/Controllers/ServerEditorController.m
+	* Output/GNUstepOutput/Controllers/ServerListConnectionController.m
+	* Output/GNUstepOutput/Controllers/ServerListController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
+	* Output/GNUstepOutput/Misc/HelperExecutor.m
+	* Output/GNUstepOutput/Misc/NSAttributedStringAdditions.m
+	* Output/GNUstepOutput/Misc/NSColorAdditions.m
+	* Output/GNUstepOutput/Views/InputControllerTextView.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* Output/GNUstepOutput/Models/Channel.m
+	* Output/GNUstepOutput/Views/AttributedTabViewItem.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerNumericCommands.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/Tab/TabMasterController.m
+	* Output/GNUstepOutput/Controllers/Preferences/BundlePreferencesController.m
+	* Output/GNUstepOutput/Controllers/Preferences/ColorPreferencesController.m
+	* Output/GNUstepOutput/Controllers/Preferences/FontPreferencesController.m
+	* Output/GNUstepOutput/Controllers/Preferences/GeneralPreferencesController.m
+	* Output/GNUstepOutput/Controllers/Preferences/PreferencesController.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardChannelController.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardContentController.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/StandardQueryController.m
+	* Output/GNUstepOutput/Misc/LookedUpHost.m
+	* Output/GNUstepOutput/Misc/NSObjectAdditions.m
+	* Output/GNUstepOutput/Misc/NSViewAdditions.m
+	Replace GS memory macros
+
+2015-02-14 Riccardo Mottola <rm@gnu.org>
+
+	* TalkSoupBundles/TalkSoup.h
+	Import files of framework locally.
+
+2015-01-05 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Models/Channel.m
+	Alloc ChannelUser, not Channel
+
+2015-01-05 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/InputController.h
+	Make tabCompletion just an NSArray
+
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionController.m
+	* Output/GNUstepOutput/Controllers/InputController.m
+	Fix warning.
+
+2013-11-21 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/GNUmakefile
+	* InFilters/Debold/GNUmakefile
+	* InFilters/Decolorizer/GNUmakefile
+	* InFilters/Dereverse/GNUmakefile
+	* InFilters/Deunderline/GNUmakefile
+	* InFilters/Emoticon/GNUmakefile
+	* InFilters/Highlighting/GNUmakefile
+	* InFilters/KeepAlive/GNUmakefile
+	* InFilters/Logging/GNUmakefile
+	* InFilters/MessageInTab/GNUmakefile
+	* InFilters/MessageOutTab/GNUmakefile
+	* InFilters/PrivateBeep/GNUmakefile
+	* InFilters/Skeleton/GNUmakefile
+	* Input/NetclassesInput/GNUmakefile
+	* OutFilters/Colorizer/GNUmakefile
+	* OutFilters/Piper/GNUmakefile
+	* OutFilters/Skeleton/GNUmakefile
+	* Output/GNUstepOutput/GNUmakefile
+	* Source/Defaults.plist
+	* TalkSoupBundles/GNUmakefile
+	Install bundles inside App resources, name bundles with .bundle extensions and update defaults accordingly.
+	(Remember to delete your defaults)
+
+2013-09-15 Sebastian Reitenbach <sebastia@l00-bugdead-prods.de>
+	* GNUmakefile
+	* Source/TalkSoupInfo.plist
+	* Output/GNUstepOutput/AllLanguages/Defaults.plist
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.m
+	GAP branding
+
+2013-09-13 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/DCCSupport.m
+	* InFilters/Emoticon/Emoticon.m
+	* InFilters/KeepAlive/KeepAlive.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	Various warning fixes.
+
+2013-09-11 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/main.m
+	* Output/GNUstepOutput/Controllers/InputController.m
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerCtcp.m
+	* Source/commands.m
+	* TalkSoupBundles/TalkSoup.h
+	Tweaks to avoid warnings, simplified (original version) of the S2AS macro without nil check to use with constant strings.
+
+2013-09-11 Riccardo Mottola <rm@gnu.org>
+
+	* InFilters/DCCSupport/DCCObject.m
+	Cast to long.
+
+2013-09-10 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Models/Channel.m
+	* Output/GNUstepOutput/Controllers/Preferences/BundlePreferencesController.m
+	Fix NSInteger/NSUInteger
+
+2013-09-09 Riccardo Mottola <rm@gnu.org>
+
+	* Input/NetclassesInput/main.m
+	Rewrite string macros.
+
+2013-09-09 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/ServerListController.h
+	* Output/GNUstepOutput/Controllers/ServerListController.m
+	* Output/GNUstepOutput/Controllers/ContentControllers/ContentController.h
+	* TalkSoupBundles/TalkSoup.m
+	NSInteger/NSUInteger fixes.
+
+2013-09-08 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Controllers/ConnectionController/ConnectionControllerInFilter.m
+	* TalkSoupBundles/TalkSoup.h
+	Do not initialize attributed strings with NIL.
+
+2013-09-01 Riccardo Mottola <rm@gnu.org>
+
+	* Output/GNUstepOutput/Misc/NSObjectAdditions.m
+	Import GNUstep runtime patches, but keep old Mac code.
+
+2005-09-06 Andy Ruder <aeruder at ksu dot edu>
+ * TalkSoup 1.0alpha 
+
+2005-07-14 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput/BundlePreferences: Moved help text to external file,
+ corrected help text.  Corrected NSTableView handling...
+
+ * GNUstepOutput/Misc: Added code to debug NSView hierarchies
+
+ * GNUstepOutput: Complete overhaul of NSTextView initializations, fixing
+ of some corrupted gorms, making text field take on chat font, and other 
+ bug fixes.
+ 
+2005-07-12 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput
+   NetclassesInput: Made changes to allow default quit message to work
+   when quitting the app, closing a window, and /quit.
+
+2005-07-07 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: Moved to using distributed notifications instead of 
+ distributed objects.
+ * GNUstepOutput: Fix autoresize of nickview
+ * GNUstepOutput: Fix tab completion picking up noncommand commandTyping:
+
+2005-06-27 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: The NSTextField was much too much of a pain to use anymore.
+ I've replaced the typing view full out with a KeyTextView which I think will
+ also allow OS X to work sanely.
+
+2005-06-26 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: On OS X focusing a textfield causes the action to be sent.
+ This was causing the messages to be sent everytime the window was made key.
+ Instead I am now trapping the key in the field editor so that it works 
+ correctly on OS X and GNUstep.
+
+2005-06-25 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: Fixed serverlist focusing issues.  When you remove a server
+ it won't always scroll to the top.
+
+ * GNUstepOutput: Added 5 .nibs (special thanks to Aaron Glenn for doing this
+ over IRC ;)
+
+2005-06-24 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: There was a bug in the sorting code for the userlist.
+ 
+ The place for typing will now retain it's position when tabs are changed/
+ windows are taken from being key.
+
+2005-06-22 Andrew Ruder <aeruder@ksu.edu>
+ * IRCSwarm: Updating to allow time constraints (to adjust time between
+ events) and correct case on nicknames.
+
+ * GNUstepOutput: Using bold font correctly.  (It was only appropriately
+ applied when the preferences were updated.)
+
+ Removed caching (over complicated logic) from NSAttributedString.
+
+ Several bug fixes in TabMasterController.m along the way to reenabling
+ the select previous/next tab/close tab buttons on the menu. (which now
+ work)
+
+ * TalkSoup.app: I am a fricking retard.  I had doubleReleaseCheck on.
+ Yes.  That is why it was slow.  I... am... a... retard.
+ 
+ Retard
+ Retard
+ Retard
+
+ TalkSoup is fast again.
+
+2005-06-20 Andrew Ruder <aeruder@ksu.edu>
+ * All: Additional header changes/code tweaks to allow clean compilation
+ on OS X.  (Still no .nib files though... :-/)
+ 
+ * All: Improvements on reducing autorelease usage.
+
+ * GNUstepOutput: Force use of NSMessagePort even when the default is
+ something else.
+
+2005-06-17 Andrew Ruder <aeruder@ksu.edu>
+ * Testing: Added a IRCSwarm testing tool that can replay preprocessed
+ xchat logs (perl scripts can be easily written to process any type of log).
+ It will connect to a server and more or less replay those logs.  Useful for
+ debugging large amounts of messages.
+ 
+2005-06-13 Andrew Ruder <aeruder@ksu.edu>
+ * All: Filled in lots of headers that will be needed for
+ OS X compilation.  Fixed relative paths in GNUmakefile.preambles
+ in Output/GNUstepOutput and Input/NetclassesInput.
+
+ * GNUstepOutput: /topic command works again, fixed topic inspector to
+ stop double querying the topic.
+
+2005-06-12 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: dns_helper returns the reverse lookup of the hostname
+ as well.
+
+2005-06-09 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: Added a helper tool class to ease use of external
+ tools + distributed objects.
+
+ Moved /server dns look ups to a helper tool
+
+ Added /alias,/unalias and a default set of aliases
+
+ * NetclassesInput: Added a warning when using a package version < 1.04
+
+ * Highlighting: Added back in the preferences to new preferences system.
+
+ * DCCSupport: Added back in the preferences to new preferences system
+
+2005-06-08 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: Changed /scrollback lines to work with new scrollback
+ history mechanism.  Obsoleted several unused preferences. ;)
+
+ * GNUstepOutput: Added Tools/ directory for various helper tools.
+ Began exec_helper (A tool to help with /exec)
+
+ * GNUstepOutput: Added /exec and /exec -o commands
+
+2005-06-05 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: Fixed history corruption when closing tab with /close.
+ Fixed notifications when removing tabs so that new selection is sent out
+ as well.
+
+2005-06-02 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: Added a method to InputController to allow a command to
+ be executed (programmatically) without making it into the history or messing
+ up what the person is currently typing.
+
+ Added support for // to escape normal command handling:
+ //dev/hda is cool
+ would send
+ /dev/hda is cool
+ to the channel.
+
+ Fixed autoconnect commands for autoconnected servers.
+
+ Fixed InputController's hold on ConnectionController when
+ a ContentController is given a new ConnectionController
+
+ Got rid of some used methods in ConnectionController pertaining to
+ InputController
+
+ Made InputController stop throwing things in the history.
+
+ Added Favorites item to the server list that always stays on top.
+
+ Added support for s// style tab completion
+
+2005-06-01 Andrew Ruder <aeruder@ksu.edu>
+ * GNUstepOutput: Topic inspector did not correctly update
+ when someone else applied a new topic.  Fixed several memory leaks
+ between interactions with ConnectionController and the ContentControllers.
+
+ Should drop connections correctly when window is closed.  Added a default
+ quit message preference and added to General preferences UI.  Added a dealloc
+ routine for the StandardContentController class.  Fixed double initialization
+ of the UI for QueryViewControllers and ChannelViewControllers.
+
+2004-01-12 Andy Ruder <aeruder at ksu dot edu>
+ * Manually applying various attributes to NSTextView subclasses
+   since OS X doesn't support custom subclasses on them.
+ * Added the emoticon bundle (thanks ludovic)
+ * Fixed a memory leak in bundle setup
+ * Fixed a weirdness on selection in bundle setup
+
+2004-01-11 Andy Ruder <aeruder at ksu dot edu>
+ * Added /ping, /topic to GNUstepOutput
+ * Made /join not require the # on the channels
+ * DCCSupport (finally) has support for using a specific range of ports and
+   setting the block size.  A GNUstepOutput preferences panel was added.
+
+2004-01-10 Andy Ruder <aeruder at ksu dot edu>
+ * Bundle Controller had a bug when dragging to bottom row
+ * GNUstepOutput will make sure bundle prefs are closed when they are unloaded
+ * Worked on making TS compilable on OSX 
+
+2004-01-05 Andy Ruder <aeruder at ksu dot edu>
+ * Updated the server list
+ * Made the server list realphabetize on startup
+ * Moved defaults into external files and into separate bundles
+ * Made Highlighting not screw up the preferences button in bundle setup
+
+2003-12-30 Andy Ruder <aeruder at ksu dot edu>
+ * Added the ability for bundles to register preferences with 
+   GNUstepOutputBundle
+ * Redid Bundle Configurator to use drag'n'drop
+ * Finished Highlighting's preferences
+
+2003-12-21 Andy Ruder <aeruder at ksu dot edu>
+ * OFTC made it into the server list
+ * made a change to the topic inspector that will hopefully make it
+   look good on OSX
+
+2003-12-19 Andy Ruder <aeruder at ksu dot edu>
+ * Made /dcc a little more sane on the syntax.
+ * Fixed some early deallocation bugs in delegate messages
+ * fixed user list weirdness
+ * fixed a server list bug when editing two different things
+
+2003-12-17 Andy Ruder <aeruder at ksu dot edu>
+ * Finished all .nibs, got Server list working as well as all the other
+   things working on the OSX port.
+ * Slightly modified bundle loading to search for bundles in the .app resource
+   path.  Will make things simpler to produce distributable binary for
+   TalkSoup at some other time for OSX.
+
+2003-12-15 Andy Ruder <aeruder at ksu dot edu>
+ * Lots of minor fixes to get OSX working.
+ * Got Preferences, Bundle Setup, Channels, User lists working on OSX.
+ * Made OSX port use the right directory for bundles (Application Support
+   as opposed to ApplicationSupport)
+
+2003-12-14 Andy Ruder <aeruder at ksu dot edu>
+ * Bundle setup now auto applies its changes.
+
+2003-12-13 Andy Ruder <aeruder at ksu dot edu>
+ * I am a retard.  I did not realize that outlets do not have an automatic
+   retain when assigned to the instance variable.  Therefore I should be
+   releasing those things either!  The only reason it worked was due to a
+   GNUstep mem-leak.  I am a retard!
+ * Fixed a bug with DCC file transfer support where it never would download
+   without an explicit directory given on the /dcc get line.
+ * Got the OSX port actually connected and talking in a channel.
+
+2003-12-07 Andy Ruder <aeruder at ksu dot edu>
+ * Made the serverlist reuse unconnected windows (with an option to force a
+   new window)
+ * Put in some checks for the validity of the download directory in dcc
+   support
+
+2003-12-06 Andy Ruder <aeruder at ksu dot edu>
+ * Made a makefile fix that should disable AppKit from being linked in on OSX
+   where it need not be.
+
+2003-11-21 Andy Ruder <aeruder at ksu dot edu>
+ * Decided I'm actually going to try to use this change log.
+ * Hopefully fixed problem with buttons not showing up in bundle setup gui
+
+2003-10-15 Andy Ruder <aeruder at ksu dot edu>
+ * TalkSoup compiles on OS X
+ * All bundles had localization info generated.
+ * Moved to using a netclasses framework
+
+2003-09-10 Andy Ruder <aeruder at ksu dot edu>
+ * Got bundle setup gui in
+ * Added plugin descriptions to all distributed bundles
+
+2003-09-08 Andy Ruder <aeruder at ksu dot edu>
+ * TalkSoup 0.82pre2
+
+2003-09-01 Andy Ruder <aeruder at ksu dot edu>
+ * TalkSoup 0.82pre1
+
+2003-06-18 Andy Ruder <aeruder at yahoo dot com>
+ * TalkSoup 0.81
+
+2003-05-27 Andy Ruder <aeruder at yahoo dot com>
+ * TalkSoup 0.80

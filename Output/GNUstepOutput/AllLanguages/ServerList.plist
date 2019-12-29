@@ -1,0 +1,713 @@
+{
+	Servers = (
+	{
+		Name = "SlashNET";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.slashnet.org";
+			Name = "irc.slashnet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "area51.slashnet.org";
+			Name = "area51.slashnet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "moo.slashnet.org";
+			Name = "moo.slashnet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "radon.slashnet.org";
+			Name = "radon.slashnet.org";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "AmigaNet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "linux.us.amiganet.org";
+			Name = "linux.us.amiganet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "whiterose.us.amiganet.org";
+			Name = "whiterose.us.amiganet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "thule.no.amiganet.org";
+			Name = "thule.no.amiganet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "dynarc.se.amiganet.org";
+			Name = "dynarc.se.amiganet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "fullcomp.au.amiganet.org";
+			Name = "fullcomp.au.amiganet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "spod.uk.amiganet.org";
+			Name = "spod.uk.amiganet.org";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "DALnet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.dal.net";
+			Name = "irc.dal.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.eu.dal.net";
+			Name = "irc.eu.dal.net";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "IRCNet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.stealth.net";
+			Name = "irc.stealth.net";
+			Port = "5550";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "ircnet.demon.co.uk";
+			Name = "ircnet.demon.co.uk";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "ircnet.hinet.hr";
+			Name = "ircnet.hinet.hr";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.datacomm.ch";
+			Name = "irc.datacomm.ch";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "ircnet.kaptech.fr";
+			Name = "ircnet.kaptech.fr";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.flashnet.it";
+			Name = "irc.flashnet.it";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.cwitaly.it";
+			Name = "irc.cwitaly.it";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "ircnet.easynet.co.uk";
+			Name = "ircnet.easynet.co.uk";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "random.ircd.de";
+			Name = "random.ircd.de";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "ircnet.netvision.net.il";
+			Name = "ircnet.netvision.net.il";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.seed.net.tw";
+			Name = "irc.seed.net.tw";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.cs.hut.fi";
+			Name = "irc.cs.hut.fi";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "OFTC";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.oftc.net";
+			Name = "irc.oftc.net";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "EFnet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.Prison.NET";
+			Name = "irc.Prison.NET";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.Qeast.net";
+			Name = "irc.Qeast.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.efnet.pl";
+			Name = "irc.efnet.pl";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.flamed.net";
+			Name = "irc.flamed.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "efnet.demon.co.uk";
+			Name = "efnet.demon.co.uk";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.lagged.org";
+			Name = "irc.lagged.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.lightning.net";
+			Name = "irc.lightning.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.mindspring.com";
+			Name = "irc.mindspring.com";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.rt.ru";
+			Name = "irc.rt.ru";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.easynews.com";
+			Name = "irc.easynews.com";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.servercentral.net";
+			Name = "irc.servercentral.net";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "UnderNet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "us.undernet.org";
+			Name = "us.undernet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "eu.undernet.org";
+			Name = "eu.undernet.org";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "FreeNode";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.freenode.net";
+			Name = "irc.freenode.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.eu.freenode.net";
+			Name = "irc.eu.freenode.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.au.freenode.net";
+			Name = "irc.au.freenode.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.us.freenode.net";
+			Name = "irc.us.freenode.net";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "ChatNet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "US.ChatNet.Org";
+			Name = "US.ChatNet.Org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "EU.ChatNet.Org";
+			Name = "EU.ChatNet.Org";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "GimpNet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.gimp.org";
+			Name = "irc.gimp.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.au.gimp.org";
+			Name = "irc.au.gimp.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.us.gimp.org";
+			Name = "irc.us.gimp.org";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "QuakeNet";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.quakenet.org";
+			Name = "irc.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.se.quakenet.org";
+			Name = "irc.se.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.dk.quakenet.org";
+			Name = "irc.dk.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.no.quakenet.org";
+			Name = "irc.no.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.fi.quakenet.org";
+			Name = "irc.fi.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.be.quakenet.org";
+			Name = "irc.be.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.uk.quakenet.org";
+			Name = "irc.uk.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.de.quakenet.org";
+			Name = "irc.de.quakenet.org";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.it.quakenet.org";
+			Name = "irc.it.quakenet.org";
+			Port = "6667";
+		}
+		);
+	},
+	{
+		Name = "2600net";
+		Entries = (
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.2600.net";
+			Name = "irc.2600.net";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.dc2600.com";
+			Name = "irc.dc2600.com";
+			Port = "6667";
+		},
+		{
+			AutoConnect = "NO";
+			Commands = "";
+			Nick = "";
+			Password = "";
+			RealName = "";
+			UserName = "";
+			Server = "irc.nyc2600.com";
+			Name = "irc.nyc2600.com";
+			Port = "6667";
+		}
+		);
+	}
+	);
+}
