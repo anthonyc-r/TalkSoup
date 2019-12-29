@@ -1,0 +1,8 @@
+obj/
+*.bundle
+*.app
+*.framework
+dns_helper
+exec_helper
+derived_src/
+.gwdir

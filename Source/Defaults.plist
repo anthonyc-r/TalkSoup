@@ -6,10 +6,9 @@
 	    InFilters = (
 		Highlighting.bundle,
 		KeepAlive.bundle,
-		DCCSupport.bundle,
 		MessageInTab.bundle
 	    );
-	    Input = NetclassesInput.bundle;
+	    Input = LibircclientInput.bundle;
 	    OutFilters = (
 		Colorizer.bundle
 	    );
