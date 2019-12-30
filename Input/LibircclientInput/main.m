@@ -20,42 +20,64 @@
 #import "main.h"
 
 #define S2AS(_x) ( (_x) ? (NSAttributedString *)[[[NSAttributedString alloc] initWithString: (_x)] autorelease] : (NSAttributedString *)nil )
+#define CS2S(_x) [NSString stringWithCString: _x]
+
+static NSMutableDictionary *SESSIONS;
+
+LibircclientConnection *object_for_session(irc_session_t *session)
+{
+  id object = [SESSIONS objectForKey: [NSNumber numberWithUnsignedInt:
+    (uintptr_t)session]];
+  if (object == nil)
+  {
+    NSLog(@"Couldn't find object for irc_session");
+  }
+  return object;
+}
 
 void event_connect(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-	NSLog(@"event connect!!!");
+  NSLog(@"event connect!!!");
+  [object_for_session(session) connectionEstablished: nil];
 }
 
 void event_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-	NSLog(@"event event_notice!!!");
-	NSLog(@"origin: %s", params[0]);
-	if (count > 1) {
-		NSLog(@"message: %s", params[1]);
-	}
+  NSLog(@"event event_notice!!!");
+  NSLog(@"from: %s", origin);
+  if (count > 1) {
+    NSLog(@"message: %s", params[1]);
+    [object_for_session(session) noticeReceived: CS2S(params[1]) to: CS2S(params[0]) 
+      from: CS2S(origin)];
+  }
 }
 
 void event_topic(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-	NSLog(@"event event_topic!!!");
+  NSLog(@"event event_topic!!!");
 }
 
 void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-	NSLog(@"event event_channel_notice!!!");
+  NSLog(@"event event_channel_notice!!!");
 }
 
 void event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-	NSLog(@"event event_channel!!!");
+  NSLog(@"event event_channel!!!");
 }
 
 void event_numeric(irc_session_t *session, unsigned int event, const char *origin, const char **params, unsigned int count)
 {
-	NSLog(@"event numeric!!");
+  NSLog(@"event numeric!!");
 }
 
 @implementation LibircclientInput
+
++ (void)initialize
+{
+  SESSIONS = [NSMutableDictionary new];
+}
 
 - (id)init
 {
@@ -87,7 +109,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
     callbacks.event_topic = event_topic;
     callbacks.event_channel_notice = event_channel_notice;
     callbacks.event_channel = event_channel;
-    irc_session = irc_create_session(&callbacks);
+    irc_session_t *irc_session = irc_create_session(&callbacks);
     if (!irc_session) {
       NSLog(@"irc_Create_session failed, returning nil.");
       return self;
@@ -102,17 +124,13 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
       NSLog(@"irc_connect failed %s", irc_strerror(irc_errno(irc_session)));
       return self;
     }
-    [self performSelectorInBackground: @selector(startNetworkLoop) withObject: nil];
     NSLog(@"connect ok to host %@", aHost);
-    LibircclientConnection *con = [[LibircclientConnection alloc] initWithNickname:
-      nickname withUserName: user withRealName: realName
+    LibircclientConnection *con = [[LibircclientConnection alloc] initWithSession:
+      irc_session nickname: nickname withUserName: user withRealName: realName
       withPassword: password withIdentification: ident onPort: aPort
       withControl: self];
     AUTORELEASE(con);
     [connections addObject: con];
-    [_TS_ newConnection: con 
-      withNickname: S2AS(nickname)
-       sender: self];
   }
   return self;
 }
@@ -123,17 +141,12 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
   return connections;
 }
 
-- (void)startNetworkLoop
-{
-  irc_run(irc_session);
-  int err = irc_errno(irc_session);
-  NSLog(@"error in run loop num %s", irc_strerror(err));
-}
 @end
 
 @implementation LibircclientConnection
 
-- (LibircclientConnection *)initWithNickname: (NSString *)aNick withUserName: (NSString *)user
+- (LibircclientConnection *)initWithSession: (irc_session_t*)session nickname:
+   (NSString *)aNick withUserName: (NSString *)user
    withRealName: (NSString *)real withPassword: (NSString *)aPass
    withIdentification: (NSString *)ident onPort: (int)aPort
    withControl: plugin;
@@ -141,6 +154,9 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
   NSLog(@"connection initwith nickame");
   if ((self = [super init]))
   {
+    [SESSIONS setObject: self forKey: [NSNumber numberWithUnsignedInt:
+      (uintptr_t)session]];
+    ircSession = session;
     identification = RETAIN(ident);
     port = aPort;
     control = plugin;
@@ -154,8 +170,21 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
     userName = user;
     RETAIN(user);
     lowercasingSelector = @selector(lowercaseIRCString);
+    // TODO: - Cancel this on dealloc.
+    [self performSelectorInBackground: @selector(startNetworkLoop) withObject: nil];
   }
   return self;
+}
+
+- (void)dealloc
+{
+    [SESSIONS removeObjectForKey: [NSNumber numberWithUnsignedInt:
+      (uintptr_t)ircSession]];
+    RELEASE(nick);
+    RELEASE(password);
+    RELEASE(userName);
+    RELEASE(realName);
+    [super dealloc];
 }
 
 - (BOOL)respondsToSelector: (SEL)aSelector
@@ -164,16 +193,11 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
   return [super respondsToSelector: aSelector];
 }
 
-- (LibircclientConnection *)connectingFailed: (NSString *)error 
+- (void)startNetworkLoop
 {
-  NSLog(@"con fail");
-  return nil;
-}
-
-- (LibircclientConnection *)connectingStarted: (NSObject *)aConnection 
-{
-  NSLog(@"con started");
-  return nil;
+  irc_run(ircSession);
+  int err = irc_errno(ircSession);
+  NSLog(@"error in run loop num %s", irc_strerror(err));
 }
 
 - (NSString *)errorMessage 
@@ -202,6 +226,18 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 
 - (NSHost *)localHost {
   NSLog(@"local host");
+  return nil;
+}
+
+- (LibircclientConnection *)connectingStarted: (NSObject *)aConnection 
+{
+  NSLog(@"connectingStarted");
+  return self;
+}
+
+- (LibircclientConnection *)connectingFailed: (NSString *)error 
+{
+  NSLog(@"con fail");
   return nil;
 }
 
@@ -561,6 +597,19 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 - (id)sendPongWithArgument: (NSString *)aString
 {
   NSLog(@"sendPongWithArgument");
+  return self;
+}
+
+// MARK: - Receiving
+
+- (id)noticeReceived: (NSString *)aMessage to: (NSString *)to
+              from: (NSString *)sender
+{
+  [_TS_ noticeReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
+    onConnection: self 
+    withNickname: S2AS(nick)
+    sender: control];
+
   return self;
 }
 

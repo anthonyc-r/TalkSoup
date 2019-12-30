@@ -6,3 +6,4 @@ dns_helper
 exec_helper
 derived_src/
 .gwdir
+*.core

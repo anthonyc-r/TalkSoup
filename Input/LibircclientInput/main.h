@@ -20,7 +20,6 @@
 
 @interface LibircclientInput : NSObject
 	{
-		irc_session_t *irc_session;
 		NSMutableArray *connections;
 	}
 
@@ -34,6 +33,7 @@
 
 @interface LibircclientConnection : NSObject
 	{
+		irc_session_t *ircSession;
 		NSString *identification;
 		NSString *errorMessage;
 		int port;
@@ -46,14 +46,11 @@
 		SEL lowercasingSelector;
 	}
 
-- (LibircclientConnection *)initWithNickname: (NSString *)aNick withUserName: (NSString *)user
+- (LibircclientConnection *)initWithSession: (irc_session_t*)session nickname:
+   (NSString *)aNick withUserName: (NSString *)user
    withRealName: (NSString *)real withPassword: (NSString *)aPass
    withIdentification: (NSString *)ident onPort: (int)aPort
    withControl: plugin;
-
-- (LibircclientConnection *)connectingFailed: (NSString *)error;
-
-- (LibircclientConnection *)connectingStarted: (NSObject *)aConnection;
 
 - (NSString *)errorMessage;
 
@@ -64,6 +61,14 @@
 - (NSHost *)remoteHost;
 
 - (NSHost *)localHost;
+
+- (LibircclientConnection *)connectingFailed: (NSString *)error;
+
+- (LibircclientConnection *)connectingStarted: (NSObject *)aConnection;
+
+- (id) connectionEstablished: (id)aTransport;
+- (id)noticeReceived: (NSString *)aMessage to: (NSString *)to
+  from: (NSString *)sender;
 @end
 
 
