@@ -59,7 +59,11 @@ void event_topic(irc_session_t *session, const char *event, const char *origin, 
 
 void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-  NSLog(@"event event_channel_notice!!!");
+  if (count > 1) {
+    NSLog(@"message: %s", params[1]);
+    [object_for_session(session) noticeReceived: CS2S(params[1]) to: CS2S(params[0]) 
+      from: CS2S(origin)];
+  }
 }
 
 void event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
@@ -605,6 +609,9 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 - (id)noticeReceived: (NSString *)aMessage to: (NSString *)to
               from: (NSString *)sender
 {
+  NSLog(@"notice received, printing debug str");
+  NSLog(@"notice received %@, from: %@, to: %@. Nick, %@, sender: %@.", aMessage, sender, to, nick, control);
+  
   [_TS_ noticeReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
     onConnection: self 
     withNickname: S2AS(nick)
