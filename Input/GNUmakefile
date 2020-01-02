@@ -1,6 +1,6 @@
 include $(GNUSTEP_MAKEFILES)/common.make
 
-SUBPROJECTS = LibircclientInput
+SUBPROJECTS = LibircclientInput NetclassesInput
 
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/aggregate.make

@@ -67,8 +67,6 @@
 - (LibircclientConnection *)connectingStarted: (NSObject *)aConnection;
 
 - (id) connectionEstablished: (id)aTransport;
-- (id)noticeReceived: (NSString *)aMessage to: (NSString *)to
-  from: (NSString *)sender;
 @end
 
 

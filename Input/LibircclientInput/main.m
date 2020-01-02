@@ -18,6 +18,7 @@
 #import <Foundation/Foundation.h>
 #import <libircclient.h>
 #import "main.h"
+#import "Recievers.h"
 
 #define S2AS(_x) ( (_x) ? (NSAttributedString *)[[[NSAttributedString alloc] initWithString: (_x)] autorelease] : (NSAttributedString *)nil )
 #define CS2S(_x) [NSString stringWithCString: _x]
@@ -38,17 +39,18 @@ LibircclientConnection *object_for_session(irc_session_t *session)
 void event_connect(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
   NSLog(@"event connect!!!");
-  [object_for_session(session) connectionEstablished: nil];
+  [object_for_session(session) connectionReceived];
 }
 
 void event_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-  NSLog(@"event event_notice!!!");
-  NSLog(@"from: %s", origin);
-  if (count > 1) {
+  NSLog(@"event event_notice!!! from: %s", origin);
+  return;
+  if (count > 1) 
+  {
     NSLog(@"message: %s", params[1]);
-    [object_for_session(session) noticeReceived: CS2S(params[1]) to: CS2S(params[0]) 
-      from: CS2S(origin)];
+    [object_for_session(session) noticeReceived: params[1] to: params[0]
+      from: origin];
   }
 }
 
@@ -59,10 +61,16 @@ void event_topic(irc_session_t *session, const char *event, const char *origin, 
 
 void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-  if (count > 1) {
-    NSLog(@"message: %s", params[1]);
-    [object_for_session(session) noticeReceived: CS2S(params[1]) to: CS2S(params[0]) 
-      from: CS2S(origin)];
+  NSLog(@"event channel notice");
+  if (count > 1) 
+  {
+    [object_for_session(session) noticeReceived: params[1] to: params[0]
+      from: origin];
+  } 
+  else
+  {
+    [object_for_session(session) noticeReceived: NULL to: params[0]
+      from: origin];
   }
 }
 
@@ -74,6 +82,8 @@ void event_channel(irc_session_t *session, const char *event, const char *origin
 void event_numeric(irc_session_t *session, unsigned int event, const char *origin, const char **params, unsigned int count)
 {
   NSLog(@"event numeric!!");
+  [object_for_session(session) numericReceived: event from: origin 
+    withParams: params count: count]; 
 }
 
 @implementation LibircclientInput
@@ -118,23 +128,28 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
       NSLog(@"irc_Create_session failed, returning nil.");
       return self;
     }
+    irc_option_set(irc_session, LIBIRC_OPTION_STRIPNICKS);
+    irc_option_set(irc_session, LIBIRC_OPTION_SSL_NO_VERIFY);
     NSLog(@"irc_create_session succeeded");
+    LibircclientConnection *con = [[LibircclientConnection alloc] 
+      initWithSession: irc_session nickname: nickname 
+      withUserName: user withRealName: realName
+      withPassword: password withIdentification: ident onPort: aPort
+      withControl: self];
+    AUTORELEASE(con);
+    
     NSString *sslHost = [[NSString alloc] initWithFormat: @"%@",
       [aHost address]]; 
-    BOOL connectBad = irc_connect(irc_session, [sslHost UTF8String],
+    BOOL connectionBad = irc_connect(irc_session, [sslHost UTF8String],
       aPort, 0, [nickname UTF8String], [user UTF8String],
       [realName UTF8String]);
-    if (connectBad) {
+    if (connectionBad) {
       NSLog(@"irc_connect failed %s", irc_strerror(irc_errno(irc_session)));
       return self;
     }
     NSLog(@"connect ok to host %@", aHost);
-    LibircclientConnection *con = [[LibircclientConnection alloc] initWithSession:
-      irc_session nickname: nickname withUserName: user withRealName: realName
-      withPassword: password withIdentification: ident onPort: aPort
-      withControl: self];
-    AUTORELEASE(con);
     [connections addObject: con];
+    [con connectionReceived];
   }
   return self;
 }
@@ -174,8 +189,6 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
     userName = user;
     RETAIN(user);
     lowercasingSelector = @selector(lowercaseIRCString);
-    // TODO: - Cancel this on dealloc.
-    [self performSelectorInBackground: @selector(startNetworkLoop) withObject: nil];
   }
   return self;
 }
@@ -248,7 +261,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 - (id) connectionEstablished: (id)aTransport;
 {
   NSLog(@"connection established");
-  [_TS_ newConnection: self withNickname: S2AS(nick) sender: self];
+  
   return self;
 }
 
@@ -270,25 +283,25 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 }
 - (id)setLowercasingSelector: (SEL)aSelector
 {
-  NSLog(@"setLowercasingSelector");
+  //NSLog(@"setLowercasingSelector");
   lowercasingSelector = aSelector;
   return self;
 }
 - (SEL)lowercasingSelector
 {
-  NSLog(@"lowercasingSelector");
+  //NSLog(@"lowercasingSelector");
   return lowercasingSelector;
 }
 - (NSComparisonResult)caseInsensitiveCompare: (NSString *)aString1
    to: (NSString *)aString2
 {
-  NSLog(@"caseInsensitiveCompare");
+  //NSLog(@"caseInsensitiveCompare");
   return ([(NSString *)[aString1 performSelector: lowercasingSelector] compare: 
     [aString2 performSelector: lowercasingSelector]]);
 }
 - (id)setNick: (NSString *)aNickname
 {
-  NSLog(@"setNick");
+  //NSLog(@"setNick");
   RELEASE(nick);
   nick = aNickname;
   RETAIN(nick);
@@ -296,7 +309,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 }
 - (NSString *)nick
 {
-  NSLog(@"nick=%@", nick);
+  //NSLog(@"nick=%@", nick);
   return nick;
 }
 - (id)setUserName: (NSString *)aUser
@@ -604,22 +617,6 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
   return self;
 }
 
-// MARK: - Receiving
-
-- (id)noticeReceived: (NSString *)aMessage to: (NSString *)to
-              from: (NSString *)sender
-{
-  NSLog(@"notice received, printing debug str");
-  NSLog(@"notice received %@, from: %@, to: %@. Nick, %@, sender: %@.", aMessage, sender, to, nick, control);
-  
-  [_TS_ noticeReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
-    onConnection: self 
-    withNickname: S2AS(nick)
-    sender: control];
-
-  return self;
-}
-
 @end
 
 // MARK: - Misc requirements
@@ -627,7 +624,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 
 - (NSString *)lowercaseIRCString
 {
-  NSLog(@"lowercaseIRCString self=%@", self);
+  //NSLog(@"lowercaseIRCString self=%@", self);
   NSMutableString *aString = [NSMutableString 
       stringWithString: [self lowercaseString]];
   NSRange aRange = {0, [aString length]};
@@ -645,7 +642,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 
 - (NSString *)lowercaseStrictRFC1459IRCString
 {
-  NSLog(@"lowercaseStrictRFC1459IRCString self=%@", self);
+  //NSLog(@"lowercaseStrictRFC1459IRCString self=%@", self);
   NSMutableString *aString = [NSMutableString 
     stringWithString: [self lowercaseString]];
   NSRange aRange = {0, [aString length]};
