@@ -39,19 +39,30 @@ LibircclientConnection *object_for_session(irc_session_t *session)
 void event_connect(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
   NSLog(@"event connect!!!");
-  [object_for_session(session) connectionReceived];
+  //[object_for_session(session) performSelectorOnMainThread: 
+  //  @selector(connectionReceived) withObject: nil waitUntilDone: NO];
 }
 
 void event_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
   NSLog(@"event event_notice!!! from: %s", origin);
-  return;
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   if (count > 1) 
   {
     NSLog(@"message: %s", params[1]);
-    [object_for_session(session) noticeReceived: params[1] to: params[0]
-      from: origin];
+    SEL selector = @selector(noticeReceived:to:from:);
+    id target = object_for_session(session);
+    NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+      [target methodSignatureForSelector: selector]];
+    [inv setSelector: selector];
+    [inv setTarget: target];
+    [inv setArgument: (void*)&(params[1]) atIndex: 2];
+    [inv setArgument: (void*)&(params[0]) atIndex: 3];
+    [inv setArgument: (void*)&(origin) atIndex: 4];
+    [inv performSelectorOnMainThread: @selector(invoke) withObject: nil waitUntilDone: 
+      YES];
   }
+  [pool release];
 }
 
 void event_topic(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
@@ -62,16 +73,26 @@ void event_topic(irc_session_t *session, const char *event, const char *origin, 
 void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
   NSLog(@"event channel notice");
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  SEL selector = @selector(noticeReceived:to:from:);
+  id target = object_for_session(session);
+  NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+    [target methodSignatureForSelector: selector]];
+  [inv setSelector: selector];
+  [inv setTarget: target];
+  [inv setArgument: (void*)&(params[0]) atIndex: 3];
+  [inv setArgument: (void*)&(origin) atIndex: 4];
   if (count > 1) 
   {
-    [object_for_session(session) noticeReceived: params[1] to: params[0]
-      from: origin];
+    [inv setArgument: (void*)&(params[1]) atIndex: 2];
   } 
   else
   {
-    [object_for_session(session) noticeReceived: NULL to: params[0]
-      from: origin];
+    [inv setArgument: NULL atIndex: 0];
+
   }
+  [inv performSelectorOnMainThread: @selector(invoke) withObject: nil waitUntilDone: YES];
+  [pool release];
 }
 
 void event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
@@ -81,9 +102,21 @@ void event_channel(irc_session_t *session, const char *event, const char *origin
 
 void event_numeric(irc_session_t *session, unsigned int event, const char *origin, const char **params, unsigned int count)
 {
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   NSLog(@"event numeric!!");
-  [object_for_session(session) numericReceived: event from: origin 
-    withParams: params count: count]; 
+  SEL selector = @selector(numericReceived:from:withParams:count:);
+  id target = object_for_session(session);
+  NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+    [target methodSignatureForSelector: selector]];
+  [inv setSelector: selector];
+  [inv setTarget: target];
+  [inv setArgument: (void*)&(event) atIndex: 2];
+  [inv setArgument: (void*)&(origin) atIndex: 3];
+  [inv setArgument: (void*)&(params) atIndex: 4];
+  [inv setArgument: (void*)&(count) atIndex: 5];
+  [inv performSelectorOnMainThread: @selector(invoke) withObject: nil waitUntilDone: 
+    YES];
+  [pool release];
 }
 
 @implementation LibircclientInput
@@ -112,45 +145,45 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
    withTimeout: (int)seconds withNickname: (NSString *)nickname 
    withUserName: (NSString *)user withRealName: (NSString *)realName 
    withPassword: (NSString *)password withIdentification: (NSString *)ident 
-   {
-  if ((self = [super init])) {
-    NSLog(@"initiate con to host");
-    irc_callbacks_t callbacks;
-    memset(&callbacks, 0, sizeof(callbacks));
-    callbacks.event_connect = event_connect;
-    callbacks.event_numeric = event_numeric;
-    callbacks.event_notice = event_notice;
-    callbacks.event_topic = event_topic;
-    callbacks.event_channel_notice = event_channel_notice;
-    callbacks.event_channel = event_channel;
-    irc_session_t *irc_session = irc_create_session(&callbacks);
-    if (!irc_session) {
-      NSLog(@"irc_Create_session failed, returning nil.");
-      return self;
-    }
-    irc_option_set(irc_session, LIBIRC_OPTION_STRIPNICKS);
-    irc_option_set(irc_session, LIBIRC_OPTION_SSL_NO_VERIFY);
-    NSLog(@"irc_create_session succeeded");
-    LibircclientConnection *con = [[LibircclientConnection alloc] 
-      initWithSession: irc_session nickname: nickname 
-      withUserName: user withRealName: realName
-      withPassword: password withIdentification: ident onPort: aPort
-      withControl: self];
-    AUTORELEASE(con);
-    
-    NSString *sslHost = [[NSString alloc] initWithFormat: @"%@",
-      [aHost address]]; 
-    BOOL connectionBad = irc_connect(irc_session, [sslHost UTF8String],
-      aPort, 0, [nickname UTF8String], [user UTF8String],
-      [realName UTF8String]);
-    if (connectionBad) {
-      NSLog(@"irc_connect failed %s", irc_strerror(irc_errno(irc_session)));
-      return self;
-    }
-    NSLog(@"connect ok to host %@", aHost);
-    [connections addObject: con];
-    [con connectionReceived];
+{
+  NSLog(@"initiate con to host");
+  irc_callbacks_t callbacks;
+  memset(&callbacks, 0, sizeof(callbacks));
+  callbacks.event_connect = event_connect;
+  callbacks.event_numeric = event_numeric;
+  callbacks.event_notice = event_notice;
+  callbacks.event_topic = event_topic;
+  callbacks.event_channel_notice = event_channel_notice;
+  callbacks.event_channel = event_channel;
+  irc_session_t *irc_session = irc_create_session(&callbacks);
+  if (!irc_session) 
+  {
+    NSLog(@"irc_Create_session failed, returning nil.");
+    return self;
   }
+  irc_option_set(irc_session, LIBIRC_OPTION_STRIPNICKS);
+  irc_option_set(irc_session, LIBIRC_OPTION_SSL_NO_VERIFY);
+  NSLog(@"irc_create_session succeeded");
+  LibircclientConnection *con = [[LibircclientConnection alloc] 
+    initWithSession: irc_session nickname: nickname 
+    withUserName: user withRealName: realName
+    withPassword: password withIdentification: ident onPort: aPort
+    withControl: self];
+  AUTORELEASE(con);
+    
+  NSString *sslHost = [[NSString alloc] initWithFormat: @"%@",
+    [aHost address]]; 
+  BOOL connectionBad = irc_connect(irc_session, [sslHost UTF8String],
+    aPort, 0, [nickname UTF8String], [user UTF8String],
+    [realName UTF8String]);
+  if (connectionBad) 
+  {
+    NSLog(@"irc_connect failed %s", irc_strerror(irc_errno(irc_session)));
+    return self;
+  }
+  NSLog(@"connect ok to host %@", aHost);
+  [connections addObject: con];
+  [con connectionReceived];
   return self;
 }
 

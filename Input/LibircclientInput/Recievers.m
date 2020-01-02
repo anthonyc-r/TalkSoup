@@ -40,9 +40,9 @@
   NSString *message = CS2S(aMessage);
   NSString *toName = CS2S(to);
   NSString *fromName = CS2S(sender);
-  NSLog(@"notice received %@, %@, %@", message, toName, fromName);
-  //[_TS_ noticeReceived: S2AS(message) to: S2AS(toName) from: S2AS(fromName)
-  //  onConnection: self withNickname: S2AS(nick) sender: control];
+  NSLog(@"[isMain: %d] notice received %@, %@, %@", [NSThread isMainThread], message, toName, fromName);
+  [_TS_ noticeReceived: S2AS(message) to: S2AS(toName) from: S2AS(fromName)
+    onConnection: self withNickname: S2AS(nick) sender: self];
 
   return self;
 }
@@ -59,7 +59,7 @@
   }
   [_TS_ numericCommandReceived: S2AS(command) withParams: paramArray
     from: S2AS(sender) onConnection: self withNickname: S2AS(nick)
-    sender: control];
+    sender: self];
   
   return self;
 }
