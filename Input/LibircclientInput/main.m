@@ -72,7 +72,7 @@ void event_topic(irc_session_t *session, const char *event, const char *origin, 
 
 void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
-  NSLog(@"event channel notice");
+  NSLog(@"event channel noticee");
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   SEL selector = @selector(noticeReceived:to:from:);
   id target = object_for_session(session);
@@ -137,6 +137,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 
 - (void)dealloc
 {
+  NSLog(@"dealloc input");
   [connections release];
   [super dealloc];
 }
@@ -170,7 +171,6 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
     withPassword: password withIdentification: ident onPort: aPort
     withControl: self];
   AUTORELEASE(con);
-    
   NSString *sslHost = [[NSString alloc] initWithFormat: @"%@",
     [aHost address]]; 
   BOOL connectionBad = irc_connect(irc_session, [sslHost UTF8String],
@@ -226,6 +226,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
   return self;
 }
 
+/*
 - (void)dealloc
 {
     [SESSIONS removeObjectForKey: [NSNumber numberWithUnsignedInt:
@@ -235,7 +236,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
     RELEASE(userName);
     RELEASE(realName);
     [super dealloc];
-}
+}*/
 
 - (BOOL)respondsToSelector: (SEL)aSelector
 {
@@ -253,7 +254,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 - (NSString *)errorMessage 
 {
   NSLog(@"err msg");
-  return @"";
+  return nil;
 }
 
 - (NSString *)identification 
@@ -265,7 +266,7 @@ void event_numeric(irc_session_t *session, unsigned int event, const char *origi
 - (int)port 
 {
   NSLog(@"port");
-  return 0;
+  return port;
 }
 
 - (NSHost *)remoteHost 

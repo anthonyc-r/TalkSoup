@@ -28,7 +28,7 @@
 - (id)connectionReceived
 {
   NSLog(@"Connection received");
-  [_TS_ newConnection: self withNickname: S2AS(nick) sender: self];
+  [_TS_ newConnection: self withNickname: S2AS(nick) sender: control];
     // TODO: - Cancel this on dealloc.
   [self performSelectorInBackground: @selector(startNetworkLoop) 
     withObject: nil];
@@ -42,8 +42,7 @@
   NSString *fromName = CS2S(sender);
   NSLog(@"[isMain: %d] notice received %@, %@, %@", [NSThread isMainThread], message, toName, fromName);
   [_TS_ noticeReceived: S2AS(message) to: S2AS(toName) from: S2AS(fromName)
-    onConnection: self withNickname: S2AS(nick) sender: self];
-
+    onConnection: self withNickname: S2AS(nick) sender: control];
   return self;
 }
 
@@ -52,14 +51,14 @@
 {
   NSString *command = [[NSNumber numberWithInt: event] description];
   NSString *sender = [NSString stringWithCString: aSender];
-  NSMutableArray *paramArray = [[NSMutableArray array] autorelease];
+  NSMutableArray *paramArray = [NSMutableArray array];
   for (int i = 0; i < count; i++)
   {
-    [paramArray addObject: [NSString stringWithCString: params[i]]];
+    [paramArray addObject: S2AS([NSString stringWithCString: params[i]])];
   }
   [_TS_ numericCommandReceived: S2AS(command) withParams: paramArray
     from: S2AS(sender) onConnection: self withNickname: S2AS(nick)
-    sender: self];
+    sender: control];
   
   return self;
 }
