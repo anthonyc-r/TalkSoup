@@ -17,7 +17,8 @@
 #import <TalkSoupBundles/TalkSoup.h>
 #import <Foundation/Foundation.h>
 #import <libircclient.h>
-#import "main.h"
+#import "LibircclientConnection.h"
+#import "LibircclientConnection+Receivers.h"
 
 @interface LibircclientConnection (Receivers)
 - (id)connectionReceived;

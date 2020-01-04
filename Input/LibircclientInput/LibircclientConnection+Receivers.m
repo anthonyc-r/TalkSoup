@@ -1,7 +1,6 @@
 /***************************************************************************
-                                main.m
+                                LibircclientConnection+Receivers.m
                           -------------------
-    begin                : Fri Dec 29 10:51:41 UTC 2019
     copyright            : (C) 2019 Anthony Conh-Richardby
  ***************************************************************************/
 
@@ -17,8 +16,8 @@
 #import <TalkSoupBundles/TalkSoup.h>
 #import <Foundation/Foundation.h>
 #import <libircclient.h>
-#import "main.h"
-#import "Recievers.h"
+#import "LibircclientConnection.h"
+#import "LibircclientConnection+Receivers.h"
 
 #define S2AS(_x) ( (_x) ? (NSAttributedString *)[[[NSAttributedString alloc] initWithString: (_x)] autorelease] : (NSAttributedString *)nil )
 #define CS2S(_x) [NSString stringWithCString: _x]

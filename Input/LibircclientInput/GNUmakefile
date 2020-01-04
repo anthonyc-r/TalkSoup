@@ -13,7 +13,10 @@ endif
 
 LibircclientInput_PRINCIPAL_CLASS = LibircclientInput
 
-LibircclientInput_OBJC_FILES = main.m Recievers.m
+LibircclientInput_H_FILES = LibircclientCallbacks.h LibircclientConnection.h \
+	LibircclientConnection+Receivers.h LibircclientInput.h 
+LibircclientInput_OBJC_FILES = LibircclientCallbacks.m LibircclientConnection.m \
+	LibircclientConnection+Receivers.m LibircclientInput.m
 
 GUI_LIB = 
 

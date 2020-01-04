@@ -1,7 +1,6 @@
 /***************************************************************************
-                                main.m
+                                LibircClientConnection.h
                           -------------------
-    begin                : Fri Dec 29 10:51:41 UTC 2019
     copyright            : (C) 2019 Anthony Conh-Richardby
  ***************************************************************************/
 
@@ -14,37 +13,23 @@
  *                                                                         *
  ***************************************************************************/
 
-#import <TalkSoupBundles/TalkSoup.h>
-#import <Foundation/NSObject.h>
+#import <Foundation/Foundation.h>
 #import <libircclient.h>
 
-@interface LibircclientInput : NSObject
-	{
-		NSMutableArray *connections;
-	}
-
-- (LibircclientInput *)initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
-   withTimeout: (int)seconds withNickname: (NSString *)nickname 
-   withUserName: (NSString *)user withRealName: (NSString *)realName 
-   withPassword: (NSString *)password withIdentification: (NSString *)ident;
-
-- (NSArray *)connections;
-@end
-
 @interface LibircclientConnection : NSObject
-	{
-		irc_session_t *ircSession;
-		NSString *identification;
-		NSString *errorMessage;
-		int port;
-		id control;
-		NSStringEncoding defaultEncoding;
-		NSString *nick;
-		NSString *userName;
-		NSString *realName;
-		NSString *password;
-		SEL lowercasingSelector;
-	}
+{
+  irc_session_t *ircSession;
+  NSString *identification;
+  NSString *errorMessage;
+  int port;
+  id control;
+  NSStringEncoding defaultEncoding;
+  NSString *nick;
+  NSString *userName;
+  NSString *realName;
+  NSString *password;
+  SEL lowercasingSelector;
+}
 
 - (LibircclientConnection *)initWithSession: (irc_session_t*)session nickname:
    (NSString *)aNick withUserName: (NSString *)user
@@ -68,5 +53,4 @@
 
 - (id) connectionEstablished: (id)aTransport;
 @end
-
 
