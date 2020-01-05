@@ -24,4 +24,9 @@
 - (id)connectionReceived;
 - (id)noticeReceived: (const char*)aMessage to: (const char*)to from: (const char*)sender;
 - (id)numericReceived: (int)event from: (const char*)aSender withParams: (const char**)params count: (int)count;
+- (id)topicReceived: (const char*)aTopic onChannel: (const char*)aChannel from: (const char*)aSender;
+- (id)channelReceived: (const char*)aChannel from: (const char*)aSender message: (const char*)aMessage;
+- (id)joinReceived: (const char*)aChannel from: (const char*)aSender;
+- (id)ctcpReqReceived: (const char*)aRequest from: (const char*)aSender;
+- (id)modeReceived: (const char*)aMode on: (const char*)aChannel from: (const char*)aSender args: (const char*)someArgs;
 @end

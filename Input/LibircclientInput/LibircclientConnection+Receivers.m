@@ -60,4 +60,59 @@
   
   return self;
 }
+
+- (id)topicReceived: (const char*)aTopic onChannel: (const char*)aChannel from: (const char*)aSender
+{
+  NSString *topic = [NSString stringWithCString: aTopic];
+  NSString *sender = [NSString stringWithCString: aSender];
+  NSString *channel = [NSString stringWithCString: aChannel];
+  [_TS_ topicChangedTo: S2AS(topic) in: S2AS(channel) from: S2AS(sender) onConnection:
+    self withNickname: S2AS(nick) sender: control];
+  return self;
+}
+
+- (id)channelReceived: (const char*)aChannel from: (const char*)aSender message: (const char*)aMessage
+{
+  return self;
+}
+
+- (id)joinReceived: (const char*)aChannel from: (const char*)aSender
+{
+  NSString *channel = [NSString stringWithCString: aChannel];
+  NSString *sender = [NSString stringWithCString: aSender];
+  [_TS_ channelJoined: S2AS(channel) from: S2AS(sender) onConnection: self
+    withNickname: S2AS(nick) sender: control];
+  return self;
+}
+
+- (id)ctcpReqReceived: (const char*)aRequest from: (const char*)aSender
+{
+  NSString *request = [NSString stringWithCString: aRequest];
+  NSString *sender = [NSString stringWithCString: aSender];
+  NSString *argument = nil;
+  NSString *receiver = nick;
+  NSLog(@"ctcpreq: %@", request);
+  [_TS_ CTCPRequestReceived: S2AS(request) withArgument: S2AS(argument)
+    to: S2AS(receiver) from: S2AS(sender) onConnection: self 
+    withNickname: S2AS(nick) sender: control];
+  return self;
+}
+
+- (id)modeReceived: (const char*)aMode on: (const char*)aChannel from: (const char*)aSender args: (const char*)someArgs
+{
+  NSString *mode = [NSString stringWithCString: aMode];
+  NSString *channel = [NSString stringWithCString: aChannel];
+  NSString *sender = [NSString stringWithCString: aSender];
+  NSString *argStr = [NSString stringWithCString: someArgs];
+  NSMutableArray *args = [NSMutableArray array];
+  if ([argStr length] > 0)
+  {
+    [args addObject: S2AS(argStr)];
+  }
+  [_TS_ modeChanged: S2AS(mode) on: S2AS(channel) withParams: 
+    args from: S2AS(sender) onConnection: self
+    withNickname: S2AS(nick) sender: control];
+  return self;
+}
+
 @end

@@ -134,6 +134,12 @@
    sender: aPluging
 {
   NSLog(@"join channel");
+  [_TS_ joinChannel: channel withPassword: aPassword onConnection: self
+    withNickname: aNick sender: control];
+  if(irc_cmd_join(ircSession, [[channel string] UTF8String], 0))
+  {
+    NSLog(@"Error joining channel");
+  }
   return self;
 }
 
@@ -299,9 +305,29 @@
 - (id)sendCTCPReply: (NSString *)aCTCP withArgument: (NSString *)args
    to: (NSString *)aPerson
 {
-  NSLog(@"sendCTCPReply");
+  NSLog(@"sendCTCPReply-short");
   return self;
 }
+
+- (id)sendCTCPReply: (NSAttributedString *)aCTCP 
+  withArgument: (NSAttributedString *)args to: (NSAttributedString *)aPerson
+  onConnection: aConnection withNickname: (NSAttributedString *)aNick 
+  sender: aPlugin
+{
+  NSString *reply = [NSString stringWithFormat: @"%@ %@", [aCTCP string],
+    [args string]];
+  NSLog(@"sendCTCPReply-long: %@", reply);
+  [_TS_ sendCTCPReply: aCTCP withArgument: args to: aPerson onConnection: self
+    withNickname: aNick sender: control];
+  BOOL failed = irc_cmd_ctcp_reply(ircSession, [[aNick string] UTF8String],
+    [reply UTF8String]);
+  if (failed)
+  {
+    NSLog(@"error replying to ctcp");
+  }
+  return self;
+}
+
 - (id)sendCTCPRequest: (NSString *)aCTCP withArgument: (NSString *)args
    to: (NSString *)aPerson
 {

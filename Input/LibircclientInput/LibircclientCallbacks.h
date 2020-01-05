@@ -33,3 +33,9 @@ void event_channel_notice(irc_session_t *session, const char *event, const char 
 void event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
 
 void event_numeric(irc_session_t *session, unsigned int event, const char *origin, const char **params, unsigned int count);
+
+void event_join(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_ctcp_req(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_mode(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);

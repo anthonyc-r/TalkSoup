@@ -55,6 +55,9 @@
   callbacks.event_topic = event_topic;
   callbacks.event_channel_notice = event_channel_notice;
   callbacks.event_channel = event_channel;
+  callbacks.event_join = event_join;
+  callbacks.event_ctcp_req = event_ctcp_req;
+  callbacks.event_mode = event_mode;
   irc_session_t *irc_session = irc_create_session(&callbacks);
   if (!irc_session) 
   {
@@ -65,7 +68,7 @@
   irc_option_set(irc_session, LIBIRC_OPTION_SSL_NO_VERIFY);
   NSLog(@"irc_create_session succeeded");
   LibircclientConnection *con = [[LibircclientConnection alloc] 
-    initWithSession: irc_session nickname: @"testyolo420swag" 
+    initWithSession: irc_session nickname: nickname 
     withUserName: user withRealName: realName
     withPassword: password withIdentification: ident onPort: aPort
     withControl: self];
