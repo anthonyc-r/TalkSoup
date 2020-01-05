@@ -58,6 +58,11 @@
   callbacks.event_join = event_join;
   callbacks.event_ctcp_req = event_ctcp_req;
   callbacks.event_mode = event_mode;
+  callbacks.event_part = event_part;
+  callbacks.event_quit = event_quit;
+  callbacks.event_nick = event_nick;
+  callbacks.event_umode = event_umode;
+  callbacks.event_kick = event_kick;
   irc_session_t *irc_session = irc_create_session(&callbacks);
   if (!irc_session) 
   {
@@ -93,6 +98,22 @@
 {
   NSLog(@"connections");
   return connections;
+}
+
+- (void)closeConnection: (id)connection
+{
+  [[connection retain] autorelease];
+  if ([connections containsObject: connection])
+  {
+    [_TS_ lostConnection: connection withNickname: S2AS([connection nick])
+      sender: self];
+    [connections removeObject: connection];
+    irc_disconnect([connection ircSession]);
+  }
+  else
+  {
+    NSLog(@"Attempt to close connection we're not aware of");
+  }
 }
 
 @end

@@ -108,6 +108,11 @@
   return nil;
 }
 
+- (irc_session_t*)ircSession
+{
+  return ircSession;
+}
+
 - (LibircclientConnection *)connectingStarted: (NSObject *)aConnection 
 {
   NSLog(@"connectingStarted");
@@ -123,9 +128,134 @@
 - (id) connectionEstablished: (id)aTransport;
 {
   NSLog(@"connection established");
-  
   return self;
 }
+
+- (void)connectionLost
+{
+
+}
+
+- (id)setLowercasingSelector: (SEL)aSelector
+{
+  lowercasingSelector = aSelector;
+  return self;
+}
+
+- (SEL)lowercasingSelector
+{
+  return lowercasingSelector;
+}
+
+- (NSComparisonResult)caseInsensitiveCompare: (NSString *)aString1
+   to: (NSString *)aString2
+{
+  return ([(NSString *)[aString1 performSelector: lowercasingSelector] compare: 
+    [aString2 performSelector: lowercasingSelector]]);
+}
+
+- (id)setNick: (NSString *)aNickname
+{
+  //NSLog(@"setNick");
+  RELEASE(nick);
+  nick = aNickname;
+  RETAIN(nick);
+  return self;
+}
+
+- (NSString *)nick
+{
+  return nick;
+}
+
+- (id)setUserName: (NSString *)aUser
+{
+  NSLog(@"setUserName");
+  RELEASE(userName);
+  userName = aUser;
+  RETAIN(userName);
+  return self;
+}
+- (NSString *)userName
+{
+  NSLog(@"userName");
+  return userName;
+}
+
+- (id)setRealName: (NSString *)aRealName
+{
+  NSLog(@"setRealName");
+  RELEASE(realName);
+  realName = aRealName;
+  RETAIN(realName);
+  return self;
+}
+
+- (NSString *)realName
+{
+  NSLog(@"realName");
+  return realName;
+}
+
+- (id)setPassword: (NSString *)aPass
+{
+  NSLog(@"setPassword");
+  return self;
+}
+
+- (NSString *)password
+{
+  NSLog(@"password");
+  return @"";
+}
+
+- (NSString *)errorString
+{
+  NSLog(@"errorString");
+  return @"";
+}
+
+- (BOOL)connected
+{
+  return YES;
+}
+
+- (id)setEncoding: (NSStringEncoding)aEncoding
+{
+  NSLog(@"setEncoding");
+  return self;
+}
+
+- (id)setEncoding: (NSStringEncoding)aEncoding forTarget: (NSString *)aTarget
+{
+  NSLog(@"setEncoding");
+  return self;
+}
+
+- (NSStringEncoding)encoding
+{
+  NSLog(@"encoding");
+  return defaultEncoding;
+}
+
+- (NSStringEncoding)encodingForTarget: (NSString *)aTarget
+{
+  NSLog(@"encodingForTarget");
+  return defaultEncoding;
+}
+
+- (void)removeEncodingForTarget: (NSString *)aTarget
+{
+  NSLog(@"removeEncodingForTarget");
+}
+
+- (NSArray *)targetsWithEncodings
+{
+  NSLog(@"targetsWithEncodings");
+  return [NSArray array];//NSAllMapTableKeys(targetToEncoding);
+}
+
+// IRC Actions
 
 - (LibircclientConnection *)joinChannel: (NSAttributedString *)channel 
    withPassword: (NSAttributedString *)aPassword 
@@ -140,172 +270,6 @@
   {
     NSLog(@"Error joining channel");
   }
-  return self;
-}
-
-// MARK: - outfilter protocol
-
-- (void)connectionLost
-{
-
-}
-- (id)setLowercasingSelector: (SEL)aSelector
-{
-  //NSLog(@"setLowercasingSelector");
-  lowercasingSelector = aSelector;
-  return self;
-}
-- (SEL)lowercasingSelector
-{
-  //NSLog(@"lowercasingSelector");
-  return lowercasingSelector;
-}
-- (NSComparisonResult)caseInsensitiveCompare: (NSString *)aString1
-   to: (NSString *)aString2
-{
-  //NSLog(@"caseInsensitiveCompare");
-  return ([(NSString *)[aString1 performSelector: lowercasingSelector] compare: 
-    [aString2 performSelector: lowercasingSelector]]);
-}
-- (id)setNick: (NSString *)aNickname
-{
-  //NSLog(@"setNick");
-  RELEASE(nick);
-  nick = aNickname;
-  RETAIN(nick);
-  return self;
-}
-- (NSString *)nick
-{
-  //NSLog(@"nick=%@", nick);
-  return nick;
-}
-- (id)setUserName: (NSString *)aUser
-{
-  NSLog(@"setUserName");
-  RELEASE(userName);
-  userName = aUser;
-  RETAIN(userName);
-  return self;
-}
-- (NSString *)userName
-{
-  NSLog(@"userName");
-  return userName;
-}
-- (id)setRealName: (NSString *)aRealName
-{
-  NSLog(@"setRealName");
-  RELEASE(realName);
-  realName = aRealName;
-  RETAIN(realName);
-  return self;
-}
-- (NSString *)realName
-{
-  NSLog(@"realName");
-  return realName;
-}
-- (id)setPassword: (NSString *)aPass
-{
-  NSLog(@"setPassword");
-  return self;
-}
-- (NSString *)password
-{
-  NSLog(@"password");
-  return @"";// password;
-}
-- (NSString *)errorString
-{
-  NSLog(@"errorString");
-  return @"";//errorString;
-}
-
-- (BOOL)connected
-{
-  return YES;//connected;
-}
-- (id)setEncoding: (NSStringEncoding)aEncoding
-{
-/*
-	defaultEncoding = aEncoding;
-	*/
-
-  NSLog(@"setEncoding");
-  return self;
-}
-- (id)setEncoding: (NSStringEncoding)aEncoding forTarget: (NSString *)aTarget
-{
-/*
-	NSString *lower = [aTarget performSelector: lowercasingSelector];
-
-	if (!lower) return self;
-
-	NSMapInsert(targetToEncoding, lower, (void *)aEncoding);
-	[targetToOriginalTarget setObject: aTarget forKey: lower];
-*/
-  NSLog(@"setEncoding");
-  return self;
-}
-- (NSStringEncoding)encoding
-{
-  NSLog(@"encoding");
-  return defaultEncoding;
-}
-- (NSStringEncoding)encodingForTarget: (NSString *)aTarget
-{
-  NSLog(@"encodingForTarget");
-  return defaultEncoding;
-	/*
-	NSString *lower = [aTarget performSelector: lowercasingSelector];
-
-	if (!lower) return defaultEncoding;
-
-	return (NSStringEncoding)NSMapGet(targetToEncoding, lower);
-*/
-}
-- (void)removeEncodingForTarget: (NSString *)aTarget
-{
-	/*
-	NSString *lower = [aTarget performSelector: lowercasingSelector];
-
-	if (!lower) return;
-
-	NSMapRemove(targetToEncoding, lower);
-	[targetToOriginalTarget removeObjectForKey: lower];
-*/
-  NSLog(@"removeEncodingForTarget");
-}
-- (NSArray *)targetsWithEncodings
-{
-  NSLog(@"targetsWithEncodings");
-  return [NSArray array];//NSAllMapTableKeys(targetToEncoding);
-}
-- (id)changeNick: (NSString *)aNick
-{
-  NSLog(@"changeNick");
-  return self;
-}
-- (id)quitWithMessage: (NSString *)aMessage
-{
-  NSLog(@"quitWithMessage");
-  return self;
-}
-- (id)partChannel: (NSString *)aChannel withMessage: (NSString *)aMessage
-{
-  NSLog(@"partChannel");
-  return self;
-}
-- (id)joinChannel: (NSString *)aChannel withPassword: (NSString *)aPassword
-{
-  NSLog(@"joinChannel");
-  return self;
-}
-- (id)sendCTCPReply: (NSString *)aCTCP withArgument: (NSString *)args
-   to: (NSString *)aPerson
-{
-  NSLog(@"sendCTCPReply-short");
   return self;
 }
 
@@ -328,179 +292,31 @@
   return self;
 }
 
-- (id)sendCTCPRequest: (NSString *)aCTCP withArgument: (NSString *)args
-   to: (NSString *)aPerson
+- (id)partChannel: (NSAttributedString *)channel 
+   withMessage: (NSAttributedString *)aMessage onConnection: aConnection
+   withNickname: (NSAttributedString *)aNick sender: aPlugin
 {
-  NSLog(@"sendCTCPRequest");
+  NSLog(@"partChannel-long");
+  [_TS_ partChannel: channel withMessage: aMessage onConnection: self
+    withNickname: aNick sender: control];
+  if (irc_cmd_part(ircSession, [[channel string] UTF8String]))
+  {
+    NSLog(@"error parting channel");
+  }
   return self;
 }
-- (id)sendMessage: (NSString *)aMessage to: (NSString *)aReceiver
+
+- (id)sendMessage: (NSAttributedString *)message to: (NSAttributedString *)receiver onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin
 {
-  NSLog(@"sendMessage");
-  return self;
-}
-- (id)sendNotice: (NSString *)aNotice to: (NSString *)aReceiver
-{
-  NSLog(@"sendNotice");
-  return self;
-}
-- (id)sendAction: (NSString *)anAction to: (NSString *)aReceiver
-{
-  NSLog(@"sendAction");
-  return self;
-}
-- (id)becomeOperatorWithName: (NSString *)aName withPassword: (NSString *)aPassword
-{
-  NSLog(@"becomeOperatorWithName");
-  return self;
-}
-- (id)requestNamesOnChannel: (NSString *)aChannel
-{
-  NSLog(@"requestNamesOnChannel");
-  return self;
-}
-- (id)requestMOTDOnServer: (NSString *)aServer
-{
-  NSLog(@"requestMOTDOnServer");
-  return self;
-}
-- (id)requestSizeInformationFromServer: (NSString *)aServer 
-    andForwardTo: (NSString *)anotherServer
-{
-  NSLog(@"requestSizeInformationFromServer");
-  return self;
-}	
-- (id)requestVersionOfServer: (NSString *)aServer
-{
-  NSLog(@"requestVersionOfServer");
-  return self;
-}
-- (id)requestServerStats: (NSString *)aServer for: (NSString *)query
-{
-  NSLog(@"requestServerStats");
-  return self;
-}
-- (id)requestServerLink: (NSString *)aLink from: (NSString *)aServer
-{
-  NSLog(@"requestServerLink");
-  return self;
-}
-- (id)requestTimeOnServer: (NSString *)aServer
-{
-  NSLog(@"requestTimeOnServer");
-  return self;
-}
-- (id)requestServerToConnect: (NSString *)aServer to: (NSString *)connectServer
-                  onPort: (NSString *)aPort
-{
-  NSLog(@"requestServerToConnect");
-  return self;
-}
-- (id)requestTraceOnServer: (NSString *)aServer
-{
-  NSLog(@"requestTraceOnServer");
-  return self;
-}
-- (id)requestAdministratorOnServer: (NSString *)aServer
-{
-  NSLog(@"requestAdministratorOnServer");
-  return self;
-}
-- (id)requestInfoOnServer: (NSString *)aServer
-{
-  NSLog(@"requestInfoOnServer");
-  return self;
-}
-- (id)requestServerRehash
-{
-  NSLog(@"requestServerRehash");
-  return self;
-}
-- (id)requestServerShutdown
-{
-  NSLog(@"requestServerShutdown");
-  return self;
-}
-- (id)requestServerRestart
-{
-  NSLog(@"requestServerRestart");
-  return self;
-}
-- (id)requestUserInfoOnServer: (NSString *)aServer
-{
-  NSLog(@"requestUserInfoOnServer");
-  return self;
-}
-- (id)areUsersOn: (NSString *)userList
-{
-  NSLog(@"areUsersOn");
-  return self;
-}
-- (id)sendWallops: (NSString *)aMessage
-{
-  NSLog(@"sendWallops");
-  return self;
-}
-- (id)listWho: (NSString *)aMask onlyOperators: (BOOL)operators
-{
-  NSLog(@"listWho");
-  return self;
-}
-- (id)whois: (NSString *)aPerson onServer: (NSString *)aServer
-{
-  NSLog(@"whois");
-  return self;
-}
-- (id)whowas: (NSString *)aPerson onServer: (NSString *)aServer
-      withNumberEntries: (NSString *)aNumber
-{
-  NSLog(@"whowas");
-  return self;
-}
-- (id)kill: (NSString *)aPerson withComment: (NSString *)aComment
-{
-  NSLog(@"kill");
-  return self;
-}
-- (id)setTopicForChannel: (NSString *)aChannel to: (NSString *)aTopic
-{
-  NSLog(@"setTopicForChannel");
-  return self;
-}
-- (id)setMode: (NSString *)aMode on: (NSString *)anObject 
-                     withParams: (NSArray *)aList
-{
-  NSLog(@"setMode");
-  return self;
-}
-- (id)listChannel: (NSString *)aChannel onServer: (NSString *)aServer
-{
-  NSLog(@"listChannel");
-  return self;
-}
-- (id)invite: (NSString *)aPerson to: (NSString *)aChannel
-{
-  NSLog(@"invite");
-  return self;
-}
-- (id)kick: (NSString *)aPerson offOf: (NSString *)aChannel for: (NSString *)aReason
-{
-  NSLog(@"kick");
-  return self;
-}
-- (id)setAwayWithMessage: (NSString *)aMessage
-{
-  NSLog(@"setAwayWithMessage");
-  return self;
-}
-- (id)sendPingWithArgument: (NSString *)aString
-{
-  NSLog(@"sendPingWithArgument");
-  return self;
-}
-- (id)sendPongWithArgument: (NSString *)aString
-{
-  NSLog(@"sendPongWithArgument");
+  NSLog(@"sendMessage-long");
+  [_TS_ sendMessage: message to: receiver onConnection: self withNickname: 
+    aNick sender: control];
+  BOOL failed = irc_cmd_msg(ircSession, [[receiver string] UTF8String],
+    [[message string] UTF8String]);
+  if (failed)
+  {
+    NSLog(@"error sending message");
+  } 
   return self;
 }
 

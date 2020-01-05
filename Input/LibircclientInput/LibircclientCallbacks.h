@@ -28,6 +28,8 @@ void event_notice(irc_session_t *session, const char *event, const char *origin,
 
 void event_topic(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
 
+void event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
 void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
 
 void event_channel(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
@@ -39,3 +41,15 @@ void event_join(irc_session_t *session, const char *event, const char *origin, c
 void event_ctcp_req(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
 
 void event_mode(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_part(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_quit(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_nick(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_umode(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_topic(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_kick(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);

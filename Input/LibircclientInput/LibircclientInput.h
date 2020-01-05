@@ -28,6 +28,7 @@
    withPassword: (NSString *)password withIdentification: (NSString *)ident;
 
 - (NSArray *)connections;
+- (void)closeConnection: (id)connection;
 @end
 
 

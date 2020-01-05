@@ -47,10 +47,31 @@
 
 - (NSHost *)localHost;
 
+- (irc_session_t*)ircSession;
+
 - (LibircclientConnection *)connectingFailed: (NSString *)error;
 
 - (LibircclientConnection *)connectingStarted: (NSObject *)aConnection;
-
 - (id) connectionEstablished: (id)aTransport;
+
+// IRC Actions
+
+- (LibircclientConnection *)joinChannel: (NSAttributedString *)channel 
+   withPassword: (NSAttributedString *)aPassword 
+   onConnection: aConnection 
+   withNickname: (NSAttributedString *)aNick 
+   sender: aPluging;
+   
+- (id)partChannel: (NSAttributedString *)channel 
+   withMessage: (NSAttributedString *)aMessage onConnection: aConnection
+   withNickname: (NSAttributedString *)aNick sender: aPlugin;
+   
+- (id)sendCTCPReply: (NSAttributedString *)aCTCP 
+  withArgument: (NSAttributedString *)args to: (NSAttributedString *)aPerson
+  onConnection: aConnection withNickname: (NSAttributedString *)aNick 
+  sender: aPlugin;
+  
+- (id)sendMessage: (NSAttributedString *)message to: (NSAttributedString *)receiver onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
+  
 @end
 

@@ -77,12 +77,6 @@ void event_notice(irc_session_t *session, const char *event, const char *origin,
   [pool release];
 }
 
-void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
-{
-  NSLog(@"event channel notice, passing to event_notice");
-  event_notice(session, event, origin, params, count);
-}
-
 void event_topic(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
@@ -115,15 +109,38 @@ void event_channel(irc_session_t *session, const char *event, const char *origin
   {
     message = params[1];
   }
-  SEL selector = @selector(channelReceived:from:message:);
+  SEL selector = @selector(channelReceived:onChannel:from:);
   id target = object_for_session(session);
   NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
     [target methodSignatureForSelector: selector]];
   [inv setSelector: selector];
   [inv setTarget: target];
-  [inv setArgument: (void*)&(params[0]) atIndex: 2];
-  [inv setArgument: (void*)&(origin) atIndex: 3];
-  [inv setArgument: (void*)&(message) atIndex: 4];
+  [inv setArgument: (void*)&(message) atIndex: 2];
+  [inv setArgument: (void*)&(params[0]) atIndex: 3];
+  [inv setArgument: (void*)&(origin) atIndex: 4];
+  [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
+    waitUntilDone: YES];
+  [pool release];
+}
+
+void event_channel_notice(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSLog(@"event_channel_notice!!!");
+  const char *notice = "";
+  if (count > 1)
+  {
+    notice = params[1];
+  }
+  SEL selector = @selector(channelNoticeReceived:onChannel:from:);
+  id target = object_for_session(session);
+  NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+    [target methodSignatureForSelector: selector]];
+  [inv setSelector: selector];
+  [inv setTarget: target];
+  [inv setArgument: (void*)&(notice) atIndex: 2];
+  [inv setArgument: (void*)&(params[0]) atIndex: 3];
+  [inv setArgument: (void*)&(origin) atIndex: 4];
   [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
     waitUntilDone: YES];
   [pool release];
@@ -201,6 +218,103 @@ void event_mode(irc_session_t *session, const char *event, const char *origin, c
   [inv setArgument: (void*)&(params[0]) atIndex: 3];
   [inv setArgument: (void*)&(origin) atIndex: 4];
   [inv setArgument: (void*)&(args) atIndex: 5];
+  [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
+    waitUntilDone: YES];
+  [pool release];
+}
+
+void event_part(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSLog(@"event_part");
+  const char *reason = "quit";
+  if (count > 1)
+  {
+    reason = params[1];
+  }
+  SEL selector = @selector(partReceivedOnChannel:from:withReason:);
+  id target = object_for_session(session);
+  NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+    [target methodSignatureForSelector: selector]];
+  [inv setSelector: selector];
+  [inv setTarget: target];
+  [inv setArgument: (void*)&(params[0]) atIndex: 2];
+  [inv setArgument: (void*)&(origin) atIndex: 3];
+  [inv setArgument: (void*)&(reason) atIndex: 4];
+  [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
+    waitUntilDone: YES];
+  [pool release];
+}
+
+void event_quit(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSLog(@"event_quit");
+  const char *reason = "quit";
+  if (count > 0)
+  {
+    reason = params[0];
+  }
+  SEL selector = @selector(quitReceived:from:);
+  id target = object_for_session(session);
+  NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+    [target methodSignatureForSelector: selector]];
+  [inv setSelector: selector];
+  [inv setTarget: target];
+  [inv setArgument: (void*)&(reason) atIndex: 2];
+  [inv setArgument: (void*)&(origin) atIndex: 3];
+  [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
+    waitUntilDone: YES];
+  [pool release];
+}
+
+void event_nick(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSLog(@"event_nick");
+  SEL selector = @selector(nickReceived:from:);
+  id target = object_for_session(session);
+  NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+    [target methodSignatureForSelector: selector]];
+  [inv setSelector: selector];
+  [inv setTarget: target];
+  [inv setArgument: (void*)&(params[0]) atIndex: 2];
+  [inv setArgument: (void*)&(origin) atIndex: 3];
+  [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
+    waitUntilDone: YES];
+  [pool release];
+}
+
+void event_umode(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
+{
+  NSLog(@"event_umode handig to event_mode");
+  event_mode(session, event, origin, params, count);
+}
+
+void event_kick(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
+{
+  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+  NSLog(@"event_kick");
+  const char *reason = "";
+  const char *kickTarget = "";
+  if (count > 1)
+  {
+    kickTarget = params[1];
+  }
+  if (count > 2)
+  {
+    reason = params[2];
+  }
+  SEL selector = @selector(kickReceived:onChannel:byKicker:withReason:);
+  id target = object_for_session(session);
+  NSInvocation *inv = [NSInvocation invocationWithMethodSignature: 
+    [target methodSignatureForSelector: selector]];
+  [inv setSelector: selector];
+  [inv setTarget: target];
+  [inv setArgument: (void*)&(kickTarget) atIndex: 2];
+  [inv setArgument: (void*)&(params[0]) atIndex: 3];
+  [inv setArgument: (void*)&(origin) atIndex: 4];
+  [inv setArgument: (void*)&(reason) atIndex: 5];
   [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
     waitUntilDone: YES];
   [pool release];

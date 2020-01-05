@@ -238,7 +238,7 @@
    withArgument: (NSString *)argument 
    to: (NSString *)receiver from: (NSString *)aPerson;
 {
-	NSLog(@"CTCPRequestReceived");
+	NSLog(@"CTCPRequestReceived %@ to %@, arg: %@", aCTCP, receiver, argument);
 	[_TS_ CTCPRequestReceived: S2AS(aCTCP) withArgument: S2AS(argument)
 	  to: S2AS(receiver) from: S2AS(aPerson) onConnection: self 
 	  withNickname: S2AS(nick)
@@ -398,7 +398,7 @@
 - (NetclassesConnection *)messageReceived: (NSString *)aMessage to: (NSString *)to
                from: (NSString *)sender
 {
-	NSLog(@"messageReceived");
+	NSLog(@"messageReceived %@, %@, %@", aMessage, to, sender);
 	[_TS_ messageReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
 	  onConnection: self 
 	  withNickname: S2AS(nick)
