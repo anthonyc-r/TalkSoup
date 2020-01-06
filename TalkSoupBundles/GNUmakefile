@@ -12,13 +12,8 @@ TalkSoupBundles_HEADER_FILES = TalkSoup.h TalkSoupProtocols.h TalkSoupMisc.h Enc
 TalkSoupBundles_OBJC_FILES = TalkSoup.m Functions.m Dummy.m Encodings.m
 TalkSoupBundles_CURRENT_VERSION_NAME=0.990
 TalkSoupBundles_DEPLOY_WITH_CURRENT_VERSION=yes
- 
-TalkSoupBundles_LOCALIZED_RESOURCE_FILES = 
-TalkSoupBundles_LDFLAGS = 
-SUBPROJECTS = 
+
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/framework.make
-include $(GNUSTEP_MAKEFILES)/aggregate.make
 -include GNUmakefile.postamble
-
 	

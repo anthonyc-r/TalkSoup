@@ -19,8 +19,6 @@ NetclassesInput_OBJC_FILES = $(main) NetclassesInputSendThenDieTransport.m
 
 GUI_LIB = 
 
-ADDITIONAL_LDFLAGS += -L.
-
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/bundle.make
 -include GNUmakefile.postamble

@@ -197,7 +197,6 @@
 
 - (void)connectionLost
 {
-	NSLog(@"connectionLost");
 	[transport close];
 	[super connectionLost];
 	[control closeConnection: self];
@@ -205,7 +204,6 @@
 
 - (IRCObject <TCPConnecting> *) connectionEstablished: (id <NetTransport>)aTransport;
 {
-	NSLog(@"connectionEstablished");
 	IRCObject <TCPConnecting> *x;
 	aTransport = [[[NetclassesInputSendThenDieTransport 
 	  alloc] initWithTransport: aTransport] autorelease];
@@ -218,7 +216,6 @@
 
 - (NetclassesConnection *)registeredWithServer
 {
-	NSLog(@"registeredWithServer");
 	[_TS_ registeredWithServerOnConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -227,7 +224,6 @@
 
 - (NetclassesConnection *)couldNotRegister: (NSString *)reason
 {
-	NSLog(@"couldNotRegister");
 	[_TS_ couldNotRegister: S2AS(reason) onConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -238,7 +234,6 @@
    withArgument: (NSString *)argument 
    to: (NSString *)receiver from: (NSString *)aPerson;
 {
-	NSLog(@"CTCPRequestReceived %@ to %@, arg: %@", aCTCP, receiver, argument);
 	[_TS_ CTCPRequestReceived: S2AS(aCTCP) withArgument: S2AS(argument)
 	  to: S2AS(receiver) from: S2AS(aPerson) onConnection: self 
 	  withNickname: S2AS(nick)
@@ -249,7 +244,6 @@
    withArgument: (NSString *)argument to: (NSString *)receiver
    from: (NSString *)aPerson
 {
-	NSLog(@"CTCPReplyReceived");
 	[_TS_ CTCPReplyReceived: S2AS(aCTCP) withArgument: S2AS(argument)
 	  to: S2AS(receiver) from: S2AS(aPerson) onConnection: self 
 	  withNickname: S2AS(nick)
@@ -258,7 +252,6 @@
 }
 - (NetclassesConnection *)errorReceived: (NSString *)anError
 {
-	NSLog(@"errorReceived");
 	[_TS_ errorReceived: S2AS(anError) onConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -266,7 +259,6 @@
 }
 - (NetclassesConnection *)wallopsReceived: (NSString *)message from: (NSString *)sender
 {
-	NSLog(@"wallopsReceived");
 	[_TS_ wallopsReceived: S2AS(message) from: S2AS(sender) onConnection: self
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -275,7 +267,6 @@
 - (NetclassesConnection *)userKicked: (NSString *)aPerson outOf: (NSString *)aChannel
          for: (NSString *)reason from: (NSString *)kicker
 {
-	NSLog(@"userKicked");
 	[_TS_ userKicked: S2AS(aPerson) outOf: S2AS(aChannel) for: S2AS(reason)
 	  from: S2AS(kicker) onConnection: self 
 	  withNickname: S2AS(nick)
@@ -284,7 +275,6 @@
 }
 - (NetclassesConnection *)invitedTo: (NSString *)aChannel from: (NSString *)inviter
 {
-	NSLog(@"invitedTo");
 	[_TS_ invitedTo: S2AS(aChannel) from: S2AS(inviter) onConnection: self
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -294,7 +284,6 @@
 - (NetclassesConnection *)modeChanged: (NSString *)mode on: (NSString *)anObject
    withParams: (NSArray *)paramList from: (NSString *)aPerson
 {
-	NSLog(@"modeChanged");
 	NSMutableArray *y;
 	NSEnumerator *iter;
 	id object;
@@ -318,7 +307,6 @@
 - (NetclassesConnection *)numericCommandReceived: (NSString *)command withParams: (NSArray *)paramList
                       from: (NSString *)sender
 {
-	NSLog(@"numericCommandReceived");
 	NSMutableArray *y;
 	NSEnumerator *iter;
 	id object;
@@ -341,8 +329,7 @@
 }
 
 - (NetclassesConnection *)nickChangedTo: (NSString *)newName from: (NSString *)aPerson
-{
-	NSLog(@"nickChangedTo");	
+{	
 	[_TS_ nickChangedTo: S2AS(newName) from: S2AS(aPerson) onConnection: self
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -352,7 +339,6 @@
 
 - (NetclassesConnection *)channelJoined: (NSString *)channel from: (NSString *)joiner
 {
-	NSLog(@"channelJoined");
 	[_TS_ channelJoined: S2AS(channel) from: S2AS(joiner) onConnection: self
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -363,7 +349,6 @@
 - (NetclassesConnection *)channelParted: (NSString *)channel withMessage: (NSString *)aMessage
              from: (NSString *)parter
 {
-	NSLog(@"channelParted");
 	[_TS_ channelParted: S2AS(channel) withMessage: S2AS(aMessage)
 	  from: S2AS(parter) onConnection: self 
 	  withNickname: S2AS(nick)
@@ -374,7 +359,6 @@
 
 - (NetclassesConnection *)quitIRCWithMessage: (NSString *)aMessage from: (NSString *)quitter
 {
-	NSLog(@"quitIRCWithMessage");
 	[_TS_ quitIRCWithMessage: S2AS(aMessage) from: S2AS(quitter) 
 	  onConnection: self 
 	  withNickname: S2AS(nick)
@@ -386,7 +370,6 @@
 - (NetclassesConnection *)topicChangedTo: (NSString *)aTopic in: (NSString *)channel
               from: (NSString *)aPerson
 {
-	NSLog(@"topicChangedTo");
 	[_TS_ topicChangedTo: S2AS(aTopic) in: S2AS(channel)
 	  from: S2AS(aPerson) onConnection: self 
 	  withNickname: S2AS(nick)
@@ -398,7 +381,6 @@
 - (NetclassesConnection *)messageReceived: (NSString *)aMessage to: (NSString *)to
                from: (NSString *)sender
 {
-	NSLog(@"messageReceived %@, %@, %@", aMessage, to, sender);
 	[_TS_ messageReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
 	  onConnection: self 
 	  withNickname: S2AS(nick)
@@ -410,7 +392,6 @@
 - (NetclassesConnection *)noticeReceived: (NSString *)aMessage to: (NSString *)to
               from: (NSString *)sender
 {
-	NSLog(@"noticeReceived");
 	[_TS_ noticeReceived: S2AS(aMessage) to: S2AS(to) from: S2AS(sender)
 	  onConnection: self 
 	  withNickname: S2AS(nick)
@@ -422,7 +403,6 @@
 - (NetclassesConnection *)actionReceived: (NSString *)anAction to: (NSString *)to
               from: (NSString *)sender
 {
-	NSLog(@"actionReceived");
 	[_TS_ actionReceived: S2AS(anAction) to: S2AS(to) from: S2AS(sender)
 	  onConnection: self 
 	  withNickname: S2AS(nick)
@@ -433,7 +413,6 @@
 
 - (NetclassesConnection *)pingReceivedWithArgument: (NSString *)arg from: (NSString *)sender
 {
-	NSLog(@"pingReceivedWithArgument");
 	[_TS_ pingReceivedWithArgument: S2AS(arg) from: S2AS(sender) 
 	  onConnection: self 
 	  withNickname: S2AS(nick)
@@ -444,7 +423,6 @@
 
 - (NetclassesConnection *)pongReceivedWithArgument: (NSString *)arg from: (NSString *)sender
 {
-	NSLog(@"pongReceivedWithArgument");
 	[_TS_ pongReceivedWithArgument: S2AS(arg) from: S2AS(sender)
 	  onConnection: self 
 	  withNickname: S2AS(nick)
@@ -455,7 +433,6 @@
 
 - (NetclassesConnection *)newNickNeededWhileRegistering
 {
-	NSLog(@"newNickNeededWhileRegistering");
 	[_TS_ newNickNeededWhileRegisteringOnConnection: self 
 	  withNickname: S2AS(nick)
 	  sender: control];
@@ -466,7 +443,6 @@
 - (NetclassesConnection *)changeNick: (NSAttributedString *)newNick onConnection: aConnection 
    withNickname: (NSAttributedString *)theNick sender: aPlugin
 {
-	NSLog(@"changeNick");
 	[_TS_ changeNick: newNick onConnection: self 
 	  withNickname: theNick
 	  sender: control];
@@ -478,7 +454,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"quitWithMessage");
 	[_TS_ quitWithMessage: aMessage onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -491,7 +466,6 @@
    onConnection: aConnection withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"partChannel");
 	[_TS_ partChannel: channel withMessage: aMessage
 	  onConnection: self 
 	  withNickname: aNick
@@ -506,7 +480,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"joinChannel");
 	[_TS_ joinChannel: channel withPassword: aPassword onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -520,7 +493,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendCTCPReply");
 	[_TS_ sendCTCPReply: aCTCP withArgument: args to: aPerson
 	  onConnection: self 
 	  withNickname: aNick
@@ -536,7 +508,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendCTCPRequest");
 	[_TS_ sendCTCPRequest: aCTCP withArgument: args
 	  to: aPerson onConnection: self 
 	  withNickname: aNick
@@ -551,7 +522,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendMessage");
 	[_TS_ sendMessage: message to: receiver onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -564,7 +534,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendNotice");
 	[_TS_ sendNotice: message to: receiver onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -577,7 +546,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendAction");
 	[_TS_ sendAction: anAction to: receiver
 	  onConnection: self 
 	  withNickname: aNick
@@ -592,7 +560,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"becomeOperatorWithName");
 	[_TS_ becomeOperatorWithName: aName withPassword: pass
 	  onConnection: self 
 	  withNickname: aNick
@@ -606,7 +573,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestNamesOnChannel");
 	[_TS_ requestNamesOnChannel: aChannel
 	  onConnection: self 
 	  withNickname: aNick
@@ -619,7 +585,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestMOTDOnServer");
 	[_TS_ requestMOTDOnServer: aServer onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -632,7 +597,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestSizeInformationFromServer");
 	[_TS_ requestSizeInformationFromServer: aServer
 	  andForwardTo: anotherServer onConnection: self
 	  withNickname: aNick
@@ -647,7 +611,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestVersionOfServer");
 	[_TS_ requestVersionOfServer: aServer
 	  onConnection: self 
 	  withNickname: aNick
@@ -662,7 +625,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestServerStats");
 	[_TS_ requestServerStats: aServer for: query
 	  onConnection: self 
 	  withNickname: aNick
@@ -677,7 +639,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestServerLink");
 	[_TS_ requestServerLink: aLink
 	 from: aServer onConnection: self 
 	  withNickname: aNick
@@ -690,7 +651,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestTimeOnServer");
 	[_TS_ requestTimeOnServer: aServer onConnection: self 
 	  withNickname: aNick
 	 sender: control];
@@ -704,7 +664,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestServerToConnect");
 	[_TS_ requestServerToConnect: aServer to: connectServer
 	  onPort: aPort onConnection: self 
 	  withNickname: aNick
@@ -718,7 +677,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestTraceOnServer");
 	[_TS_ requestTraceOnServer: aServer onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -731,7 +689,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestAdministratorOnServer");
 	[_TS_ requestAdministratorOnServer: aServer onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -743,7 +700,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestInfoOnServer");
 	[_TS_ requestInfoOnServer: aServer onConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -755,7 +711,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestServerRehashOnConnection");
 	[_TS_ requestServerRehashOnConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -767,7 +722,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestServerShutdownOnConnection");
 	[_TS_ requestServerShutdownOnConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -779,7 +733,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestServerRestartOnConnection");
 	[_TS_ requestServerRestartOnConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -792,7 +745,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"requestUserInfoOnServer");
 	[_TS_ requestUserInfoOnServer: aServer onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -804,7 +756,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"areUsersOn");
 	[_TS_ areUsersOn: userList onConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -816,7 +767,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendWallops");
 	[_TS_ sendWallops: message onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -829,7 +779,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"listWho");
 	[_TS_ listWho: aMask onlyOperators: operators onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -842,7 +791,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"whois");
 	[_TS_ whois: aPerson onServer: aServer onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -855,7 +803,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"whowas");
 	[_TS_ whowas: aPerson onServer: aServer withNumberEntries: aNumber
 	  onConnection: self 
 	  withNickname: aNick
@@ -871,7 +818,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"kill");
 	[_TS_ kill: aPerson withComment: aComment onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -885,7 +831,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"setTopicForChannel");
 	[_TS_ setTopicForChannel: aChannel
 	  to: aTopic onConnection: self 
 	  withNickname: aNick
@@ -899,7 +844,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"setMode");
 	NSMutableArray *a;
 	NSEnumerator *iter;
 	NSAttributedString *object;
@@ -927,7 +871,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"listChannel");
 	[_TS_ listChannel: aChannel onServer: aServer
 	  onConnection: self 
 	  withNickname: aNick
@@ -941,7 +884,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"invite");
 	[_TS_ invite: aPerson to: aChannel onConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -955,7 +897,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"kick");
 	[_TS_ kick: aPerson offOf: aChannel for: reason onConnection: self
 	  withNickname: aNick
 	  sender: control];
@@ -967,7 +908,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"setAwayWithMessage");
 	[_TS_ setAwayWithMessage: message onConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -979,7 +919,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendPingWithArgument");
 	[_TS_ sendPingWithArgument: aString onConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -991,7 +930,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"sendPongWithArgument");
 	[_TS_ sendPongWithArgument: aString onConnection: self 
 	  withNickname: aNick
 	  sender: control];
@@ -1003,7 +941,6 @@
    withNickname: (NSAttributedString *)aNick 
    sender: aPlugin
 {
-	NSLog(@"writeRawString");
 	[_TS_ writeRawString: aString onConnection: self 
 	  withNickname: aNick
 	  sender: control];
