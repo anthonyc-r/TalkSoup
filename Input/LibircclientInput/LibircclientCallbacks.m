@@ -128,9 +128,14 @@ void event_channel_notice(irc_session_t *session, const char *event, const char 
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
   NSLog(@"event_channel_notice!!!");
   const char *notice = "";
+  const char *from = "";
   if (count > 1)
   {
     notice = params[1];
+  }
+  if (origin != NULL)
+  {
+    from = origin;
   }
   SEL selector = @selector(channelNoticeReceived:onChannel:from:);
   id target = object_for_session(session);
@@ -140,7 +145,7 @@ void event_channel_notice(irc_session_t *session, const char *event, const char 
   [inv setTarget: target];
   [inv setArgument: (void*)&(notice) atIndex: 2];
   [inv setArgument: (void*)&(params[0]) atIndex: 3];
-  [inv setArgument: (void*)&(origin) atIndex: 4];
+  [inv setArgument: (void*)&(from) atIndex: 4];
   [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
     waitUntilDone: YES];
   [pool release];
@@ -318,4 +323,11 @@ void event_kick(irc_session_t *session, const char *event, const char *origin, c
   [inv performSelectorOnMainThread: @selector(invoke) withObject: nil
     waitUntilDone: YES];
   [pool release];
+}
+
+
+void event_prvmsg(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
+{
+  NSLog(@"event_prvmsg - passing to event_channel");
+  event_channel(session, event, origin, params, count);
 }

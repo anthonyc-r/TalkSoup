@@ -28,9 +28,10 @@
 {
   NSLog(@"Connection received");
   [_TS_ newConnection: self withNickname: S2AS(nick) sender: control];
-    // TODO: - Cancel this on dealloc.
   [self performSelectorInBackground: @selector(startNetworkLoop) 
     withObject: nil];
+  [_TS_ registeredWithServerOnConnection: self withNickname: S2AS(nick)
+    sender: control];
   return self;
 }
 

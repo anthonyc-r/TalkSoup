@@ -63,6 +63,7 @@
   callbacks.event_nick = event_nick;
   callbacks.event_umode = event_umode;
   callbacks.event_kick = event_kick;
+  callbacks.event_privmsg = event_prvmsg;
   irc_session_t *irc_session = irc_create_session(&callbacks);
   if (!irc_session) 
   {
@@ -78,15 +79,13 @@
     withPassword: password withIdentification: ident onPort: aPort
     withControl: self];
   AUTORELEASE(con);
-  NSString *sslHost = [[NSString alloc] initWithFormat: @"%@",
-    [aHost address]]; 
-  BOOL connectionBad = irc_connect(irc_session, [sslHost UTF8String],
-    aPort, 0, [nickname UTF8String], [user UTF8String],
-    [realName UTF8String]);
+  NSString *addr = [aHost address];
+  BOOL connectionBad = irc_connect(irc_session, [addr UTF8String], aPort, 0, 
+    [nickname UTF8String], [user UTF8String], [realName UTF8String]);
   if (connectionBad) 
   {
-    NSLog(@"irc_connect failed %s", irc_strerror(irc_errno(irc_session)));
-    return self;
+    NSLog(@"irc_connect failed: %s", 
+      irc_strerror(irc_errno(irc_session)));
   }
   NSLog(@"connect ok to host %@", aHost);
   [connections addObject: con];

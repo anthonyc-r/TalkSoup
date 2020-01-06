@@ -53,3 +53,5 @@ void event_umode(irc_session_t *session, const char *event, const char *origin, 
 void event_topic(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
 
 void event_kick(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
+void event_prvmsg(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);

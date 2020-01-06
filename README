@@ -60,6 +60,7 @@ This distribution comes with:
 Input Plugins:
 
   *NetclassesInput: an input plugin based on netclasses
+  *LibircclientInput: an input plugin based on libircclient
 
 Output Plugins:
 

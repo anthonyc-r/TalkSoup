@@ -21,6 +21,7 @@
   irc_session_t *ircSession;
   NSString *identification;
   NSString *errorMessage;
+  BOOL isConnected;
   int port;
   id control;
   NSStringEncoding defaultEncoding;
@@ -72,6 +73,8 @@
   sender: aPlugin;
   
 - (id)sendMessage: (NSAttributedString *)message to: (NSAttributedString *)receiver onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
+
+- (id) listChannel: (NSAttributedString *)aChannel onServer: (NSAttributedString *)aServer onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
   
 @end
 

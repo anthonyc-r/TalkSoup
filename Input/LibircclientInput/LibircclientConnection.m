@@ -66,45 +66,38 @@
     [super dealloc];
 }*/
 
-- (BOOL)respondsToSelector: (SEL)aSelector
-{
-  //NSLog(@"respondsToSelector: %@",  NSStringFromSelector(aSelector));
-  return [super respondsToSelector: aSelector];
-}
-
 - (void)startNetworkLoop
 {
   irc_run(ircSession);
   int err = irc_errno(ircSession);
   NSLog(@"error in run loop num %s", irc_strerror(err));
+  RELEASE(errorMessage);
+  errorMessage = RETAIN([NSString stringWithCString: irc_strerror(err)]);
+  [_TS_ lostConnection: self withNickname: S2AS(nick) sender: control];
+  isConnected = NO;
 }
 
 - (NSString *)errorMessage 
 {
-  NSLog(@"err msg");
-  return nil;
+  return errorMessage;
 }
 
 - (NSString *)identification 
 {
-  NSLog(@"ident=%@", identification);
   return identification;
 }
 
 - (int)port 
 {
-  NSLog(@"port");
   return port;
 }
 
 - (NSHost *)remoteHost 
 {
-  NSLog(@"remote host");
   return nil;
 }
 
 - (NSHost *)localHost {
-  NSLog(@"local host");
   return nil;
 }
 
@@ -115,25 +108,21 @@
 
 - (LibircclientConnection *)connectingStarted: (NSObject *)aConnection 
 {
-  NSLog(@"connectingStarted");
   return self;
 }
 
 - (LibircclientConnection *)connectingFailed: (NSString *)error 
 {
-  NSLog(@"con fail");
   return nil;
 }
 
 - (id) connectionEstablished: (id)aTransport;
 {
-  NSLog(@"connection established");
   return self;
 }
 
 - (void)connectionLost
 {
-
 }
 
 - (id)setLowercasingSelector: (SEL)aSelector
@@ -156,7 +145,6 @@
 
 - (id)setNick: (NSString *)aNickname
 {
-  //NSLog(@"setNick");
   RELEASE(nick);
   nick = aNickname;
   RETAIN(nick);
@@ -170,7 +158,6 @@
 
 - (id)setUserName: (NSString *)aUser
 {
-  NSLog(@"setUserName");
   RELEASE(userName);
   userName = aUser;
   RETAIN(userName);
@@ -178,13 +165,11 @@
 }
 - (NSString *)userName
 {
-  NSLog(@"userName");
   return userName;
 }
 
 - (id)setRealName: (NSString *)aRealName
 {
-  NSLog(@"setRealName");
   RELEASE(realName);
   realName = aRealName;
   RETAIN(realName);
@@ -193,65 +178,58 @@
 
 - (NSString *)realName
 {
-  NSLog(@"realName");
   return realName;
 }
 
 - (id)setPassword: (NSString *)aPass
 {
-  NSLog(@"setPassword");
+  RETAIN(aPass);
+  RELEASE(password);
+  password = aPass;
   return self;
 }
 
 - (NSString *)password
 {
-  NSLog(@"password");
-  return @"";
+  return password;
 }
 
 - (NSString *)errorString
 {
-  NSLog(@"errorString");
-  return @"";
+  return errorMessage;
 }
 
 - (BOOL)connected
 {
-  return YES;
+  return isConnected;
 }
 
 - (id)setEncoding: (NSStringEncoding)aEncoding
 {
-  NSLog(@"setEncoding");
   return self;
 }
 
 - (id)setEncoding: (NSStringEncoding)aEncoding forTarget: (NSString *)aTarget
 {
-  NSLog(@"setEncoding");
   return self;
 }
 
 - (NSStringEncoding)encoding
 {
-  NSLog(@"encoding");
   return defaultEncoding;
 }
 
 - (NSStringEncoding)encodingForTarget: (NSString *)aTarget
 {
-  NSLog(@"encodingForTarget");
   return defaultEncoding;
 }
 
 - (void)removeEncodingForTarget: (NSString *)aTarget
 {
-  NSLog(@"removeEncodingForTarget");
 }
 
 - (NSArray *)targetsWithEncodings
 {
-  NSLog(@"targetsWithEncodings");
   return [NSArray array];//NSAllMapTableKeys(targetToEncoding);
 }
 
@@ -319,6 +297,18 @@
   } 
   return self;
 }
+
+- (id) listChannel: (NSAttributedString *)aChannel onServer: (NSAttributedString *)aServer onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin
+{
+  const char *channel = [[aChannel string] UTF8String]; 
+  if (irc_cmd_list(ircSession, channel))
+  {
+    NSLog(@"Failed to get channel list");
+  }
+  return self;
+}
+
+
 
 @end
 
