@@ -46,12 +46,12 @@
 }
 
 
-- (id)numericReceived: (int)event from: (const char*)aSender withParams: (const char**)params count: (int)count;
+- (id)numericReceived: (NSNumber*)event from: (const char*)aSender withParams: (const char**)params count: (NSNumber*)count;
 {
-  NSString *command = [[NSNumber numberWithInt: event] description];
+  NSString *command = [event description];
   NSString *sender = [NSString stringWithCString: aSender];
   NSMutableArray *paramArray = [NSMutableArray array];
-  for (int i = 1; i < count; i++)
+  for (int i = 1; i < [count intValue]; i++)
   {
     [paramArray addObject: S2AS([NSString stringWithCString: params[i]])];
   }

@@ -23,7 +23,7 @@
 @interface LibircclientConnection (Receivers)
 - (id)connectionReceived;
 - (id)noticeReceived: (const char*)aMessage to: (const char*)to from: (const char*)sender;
-- (id)numericReceived: (int)event from: (const char*)aSender withParams: (const char**)params count: (int)count;
+- (id)numericReceived: (NSNumber*)event from: (const char*)aSender withParams: (const char**)params count: (NSNumber*)count;
 - (id)topicReceived: (const char*)aTopic onChannel: (const char*)aChannel from: (const char*)aSender;
 - (id)channelNoticeReceived: (const char*)aNotice onChannel: (const char*)channel from: (const char*)aSender;
 - (id)channelReceived: (const char*)aMessage onChannel: (const char*)aChannel from: (const char*)aSender;
