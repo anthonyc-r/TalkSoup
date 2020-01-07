@@ -57,11 +57,12 @@
   callbacks.event_channel = event_channel;
   callbacks.event_join = event_join;
   callbacks.event_ctcp_req = event_ctcp_req;
+  callbacks.event_ctcp_rep = event_ctcp_rep;
   callbacks.event_mode = event_mode;
+  callbacks.event_umode = event_umode;
   callbacks.event_part = event_part;
   callbacks.event_quit = event_quit;
   callbacks.event_nick = event_nick;
-  callbacks.event_umode = event_umode;
   callbacks.event_kick = event_kick;
   callbacks.event_privmsg = event_prvmsg;
   irc_session_t *irc_session = irc_create_session(&callbacks);

@@ -40,6 +40,8 @@ void event_join(irc_session_t *session, const char *event, const char *origin, c
 
 void event_ctcp_req(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
 
+void event_ctcp_rep(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
+
 void event_mode(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);
 
 void event_part(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count);

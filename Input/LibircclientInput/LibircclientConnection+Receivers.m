@@ -119,6 +119,19 @@
   return self;
 }
 
+- (id)ctcpRepReceived: (const char*)aReply from: (const char*)aSender
+{
+  NSString *reply = [NSString stringWithCString: aReply];
+  NSString *sender = [NSString stringWithCString: aSender];
+  NSString *argument = nil;
+  NSString *receiver = nick;
+  NSLog(@"ctcpreq: %@", reply);
+  [_TS_ CTCPReplyReceived: S2AS(reply) withArgument: S2AS(argument)
+    to: S2AS(receiver) from: S2AS(sender) onConnection: self 
+    withNickname: S2AS(nick) sender: control];
+  return self;
+}
+
 - (id)modeReceived: (const char*)aMode on: (const char*)aChannel from: (const char*)aSender args: (const char*)someArgs
 {
   NSString *mode = [NSString stringWithCString: aMode];

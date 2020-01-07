@@ -29,6 +29,7 @@
 - (id)channelReceived: (const char*)aMessage onChannel: (const char*)aChannel from: (const char*)aSender;
 - (id)joinReceived: (const char*)aChannel from: (const char*)aSender;
 - (id)ctcpReqReceived: (const char*)aRequest from: (const char*)aSender;
+- (id)ctcpRepReceived: (const char*)aReply from: (const char*)aSender;
 - (id)modeReceived: (const char*)aMode on: (const char*)aChannel from: (const char*)aSender args: (const char*)someArgs;
 - (id)partReceivedOnChannel: (const char*)aChannel from: (const char*)aSender withReason: (const char*)aReason;
 - (id)quitReceived: (const char*)aMessage from: (const char*)aSender;
