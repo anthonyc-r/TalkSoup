@@ -298,7 +298,7 @@
   return self;
 }
 
-- (id) listChannel: (NSAttributedString *)aChannel onServer: (NSAttributedString *)aServer onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin
+- (id)listChannel: (NSAttributedString *)aChannel onServer: (NSAttributedString *)aServer onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin
 {
   const char *channel = [[aChannel string] UTF8String]; 
   if (irc_cmd_list(ircSession, channel))
@@ -308,7 +308,26 @@
   return self;
 }
 
-
+// aMode and anObject seem to be the other way around to what you'd expect.
+- (id)setMode: (NSAttributedString *)aMode on: (NSAttributedString *)anObject 
+   withParams: (NSArray *)list onConnection: aConnection 
+   withNickname: (NSAttributedString *)aNick 
+   sender: aPlugin
+{
+  NSString *target = [aMode string];
+  NSMutableString *mode = [[anObject string] mutableCopy];
+  for (int i = 0; i < [list count]; i++)
+  {
+    [mode appendFormat: @" %@", [[list objectAtIndex: i] string]];
+  }
+  BOOL error = irc_cmd_channel_mode(ircSession, [target UTF8String], 
+    [mode UTF8String]);
+  if (error)
+  {
+    NSLog(@"Failed to set mode");
+  }
+  return self;
+}
 
 @end
 
