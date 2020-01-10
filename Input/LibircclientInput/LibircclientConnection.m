@@ -309,11 +309,10 @@
 }
 
 // aMode and anObject seem to be the other way around to what you'd expect.
-- (id)setMode: (NSAttributedString *)aMode on: (NSAttributedString *)anObject 
-   withParams: (NSArray *)list onConnection: aConnection 
-   withNickname: (NSAttributedString *)aNick 
-   sender: aPlugin
+- (id)setMode: (NSAttributedString *)aMode on: (NSAttributedString *)anObject withParams: (NSArray *)list onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
 {
+  [_TS_ setMode: aMode on: anObject withParams: list onConnection: self 
+    withNickname: aNick sender: control];
   NSString *target = [aMode string];
   NSMutableString *mode = [[anObject string] mutableCopy];
   for (int i = 0; i < [list count]; i++)
@@ -325,6 +324,19 @@
   if (error)
   {
     NSLog(@"Failed to set mode");
+  }
+  return self;
+}
+
+- (id)sendAction: (NSAttributedString *)anAction to: (NSAttributedString *)receiver onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin
+{
+  [_TS_ sendAction: anAction to: receiver onConnection: self withNickname: aNick
+    sender: control];
+  BOOL error = irc_cmd_me(ircSession, [[receiver string] UTF8String], [[anAction 
+    string] UTF8String]);
+  if (error)
+  {
+    NSLog(@"Failed to send action");
   }
   return self;
 }

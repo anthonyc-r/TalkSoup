@@ -74,7 +74,11 @@
   
 - (id)sendMessage: (NSAttributedString *)message to: (NSAttributedString *)receiver onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
 
-- (id) listChannel: (NSAttributedString *)aChannel onServer: (NSAttributedString *)aServer onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
+- (id)listChannel: (NSAttributedString *)aChannel onServer: (NSAttributedString *)aServer onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
   
+- (id)setMode: (NSAttributedString *)aMode on: (NSAttributedString *)anObject withParams: (NSArray *)list onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
+
+- (id)sendAction: (NSAttributedString *)anAction to: (NSAttributedString *)receiver onConnection: aConnection withNickname: (NSAttributedString *)aNick sender: aPlugin;
+
 @end
 
