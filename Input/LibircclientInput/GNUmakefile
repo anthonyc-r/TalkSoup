@@ -19,7 +19,7 @@ LibircclientInput_OBJC_FILES = LibircclientCallbacks.m LibircclientConnection.m 
 	LibircclientConnection+Receivers.m LibircclientInput.m
 
 GUI_LIB = 
-
+ADDITIONAL_FLAGS += -std=gnu99
 -include GNUmakefile.preamble
 include $(GNUSTEP_MAKEFILES)/bundle.make
 -include GNUmakefile.postamble
