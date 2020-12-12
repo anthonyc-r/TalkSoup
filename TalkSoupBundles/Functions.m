@@ -492,7 +492,7 @@ NSMutableAttributedString *BuildAttributedString(id aObject, ...)
 				}
 			}
 		}
-	} while ((aObject = va_arg(ap, id)));
+	} while ((aObject = va_arg(ap, void*)));
 
 	va_end(ap);
 	[objects release];
@@ -551,7 +551,7 @@ NSMutableAttributedString *BuildAttributedFormat(id aObject, ...)
 			tmpr.location = oldRange.location;
 			
 			[str appendAttributedString: [aObject attributedSubstringFromRange: tmpr]];
-			tmp = va_arg(ap, id);
+			tmp = va_arg(ap, void*);
 			if (tmp == nil)
 			  {
 			    tmp = [[[NSAttributedString alloc] initWithString:@""] autorelease];

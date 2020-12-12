@@ -261,7 +261,7 @@
   NSLog(@"sendCTCPReply-long: %@", reply);
   [_TS_ sendCTCPReply: aCTCP withArgument: args to: aPerson onConnection: self
     withNickname: aNick sender: control];
-  BOOL failed = irc_cmd_ctcp_reply(ircSession, [[aNick string] UTF8String],
+  BOOL failed = irc_cmd_ctcp_reply(ircSession, [[aPerson string] UTF8String],
     [reply UTF8String]);
   if (failed)
   {

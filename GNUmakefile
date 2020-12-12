@@ -6,10 +6,13 @@ VERSION=1.1
 SVN_BASE_URL = svn+ssh://svn.savannah.nongnu.org/gap/user-apps
 SVN_MODULE_NAME = TalkSoup
 
+
+
 ifneq ($(USE_DMALLOC),)
 ADDITIONAL_OBJCFLAGS += -include stdlib.h -include dmalloc.h
 ADDITIONAL_LDFLAGS += -ldmalloc
 endif
+ADDITIONAL_LDFLAGS += -v
 
 ifeq ($(USE_APPKIT),)
 USE_APPKIT = yes

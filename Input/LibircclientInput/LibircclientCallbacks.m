@@ -187,7 +187,7 @@ void event_join(irc_session_t *session, const char *event, const char *origin, c
 void event_ctcp_req(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSLog(@"event_join");
+  NSLog(@"event_ctcp_req");
   [object_for_session(session) performSelectorOnMainThread: 
     @selector(ctcpReqReceived:from:) withObject: (id)params[0] andObject:
     (id)origin];
@@ -197,7 +197,7 @@ void event_ctcp_req(irc_session_t *session, const char *event, const char *origi
 void event_ctcp_rep(irc_session_t *session, const char *event, const char *origin, const char **params, unsigned int count)
 {
   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-  NSLog(@"event_join");
+  NSLog(@"event_ctcp_rep");
   [object_for_session(session) performSelectorOnMainThread: 
     @selector(ctcpRepReceived:from:) withObject: (id)params[0] andObject:
     (id)origin];
