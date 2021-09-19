@@ -39,6 +39,12 @@
    withUserName: (NSString *)user withRealName: (NSString *)realName 
    withPassword: (NSString *)password withIdentification: (NSString *)ident;
 
+- initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
+   withTimeout: (int)seconds withNickname: (NSString *)nickname 
+   withUserName: (NSString *)user withRealName: (NSString *)realName 
+   withPassword: (NSString *)password withIdentification: (NSString *)ident
+   withSSL: (BOOL)useSSL;
+
 - (void)closeConnection: (id)connection;
 
 - (NSArray *)connections;

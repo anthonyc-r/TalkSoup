@@ -40,6 +40,7 @@ extern NSString *DNSLookupNotification;
 		NSString *password;
 		NSString *realName;
 		NSString *server;
+		BOOL useSSL;
 		
 		id connection;
 		id <ContentController> content;

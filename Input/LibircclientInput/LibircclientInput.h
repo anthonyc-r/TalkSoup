@@ -25,7 +25,8 @@
 - (LibircclientInput *)initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
    withTimeout: (int)seconds withNickname: (NSString *)nickname 
    withUserName: (NSString *)user withRealName: (NSString *)realName 
-   withPassword: (NSString *)password withIdentification: (NSString *)ident;
+   withPassword: (NSString *)password withIdentification: (NSString *)ident
+   withSSL: (BOOL)useSSL;
 
 - (NSArray *)connections;
 - (void)closeConnection: (id)connection;

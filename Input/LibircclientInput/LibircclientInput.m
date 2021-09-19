@@ -15,7 +15,7 @@
 
 #import <TalkSoupBundles/TalkSoup.h>
 #import <Foundation/Foundation.h>
-#import <llibircclient.h>
+#import <libircclient.h>
 #import "LibircclientInput.h"
 #import "LibircclientConnection.h"
 #import "LibircclientCallbacks.h"
@@ -44,9 +44,10 @@
 - (LibircclientInput *)initiateConnectionToHost: (NSHost *)aHost onPort: (int)aPort
    withTimeout: (int)seconds withNickname: (NSString *)nickname 
    withUserName: (NSString *)user withRealName: (NSString *)realName 
-   withPassword: (NSString *)password withIdentification: (NSString *)ident 
+   withPassword: (NSString *)password withIdentification: (NSString *)ident
+   withSSL: (BOOL)ssl
 {
-  NSLog(@"initiate con to host");
+  NSLog(@"initiate con to host:");
   irc_callbacks_t callbacks;
   memset(&callbacks, 0, sizeof(callbacks));
   callbacks.event_connect = event_connect;
@@ -80,13 +81,22 @@
     withPassword: password withIdentification: ident onPort: aPort
     withControl: self];
   AUTORELEASE(con);
-  NSString *addr = [aHost address];
+  NSString *addr;
+  if (ssl)
+  {
+    NSLog(@"USING SSL!");
+    addr = [NSString stringWithFormat: @"#%@", [aHost address]];
+  }
+  else
+  {
+    addr = [aHost address];
+  }
   BOOL connectionBad = irc_connect(irc_session, [addr UTF8String], aPort,
     [password UTF8String], [nickname UTF8String], [user UTF8String], [realName UTF8String]);
   if (connectionBad) 
   {
     NSLog(@"irc_connect failed: %s", 
-      irc_strerror(irc_errno(irc_session)));
+    irc_strerror(irc_errno(irc_session)));
   }
   NSLog(@"connect ok to host %@", aHost);
   [connections addObject: con];

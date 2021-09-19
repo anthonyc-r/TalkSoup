@@ -102,6 +102,10 @@
 {
 	return nickField;
 }
+- (NSButton *)sslButton
+{
+  return sslButton;
+}
 - (void)setConnect: (id)sender
 {
 }
@@ -127,6 +131,9 @@
 {
 }
 - (void)setEntry: (id)sender
+{
+}
+- (void)setSSL: (id)sender
 {
 }
 @end 

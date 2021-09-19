@@ -28,6 +28,7 @@ extern NSString *ServerListInfoName;
 extern NSString *ServerListInfoEntries;
 extern NSString *ServerListInfoCommands;
 extern NSString *ServerListInfoAutoConnect;
+extern NSString *ServerListInfoSSL;
 
 #ifndef SERVER_LIST_CONTROLLER_H
 #define SERVER_LIST_CONTROLLER_H

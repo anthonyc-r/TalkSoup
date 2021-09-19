@@ -38,6 +38,7 @@
 		NSTextField *entryField;
 		NSWindow *window;
 		NSTextField *nickField;
+		NSButton *sslButton;
 	}
 
 - (NSButton *)connectButton;
@@ -52,6 +53,7 @@
 - (NSTextField *)entryField;
 - (NSWindow *)window;
 - (NSTextField *)nickField;
+- (NSButton *)sslButton;
 
 - (void)setConnect: (id)sender;
 - (void)setCommands: (id)sender;

@@ -57,6 +57,7 @@ NSString *ServerListInfoName = @"Name";
 NSString *ServerListInfoEntries = @"Entries";
 NSString *ServerListInfoAutoConnect = @"AutoConnect";
 NSString *ServerListFavorites = @"Favorites";
+NSString *ServerListInfoSSL = @"SSL";
 
 #define APP_SUPPORT @"/ApplicationSupport/"
 #ifndef GNUSTEP
@@ -494,6 +495,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 		NSString *port = [[editor portField] stringValue];
 		int first = [browser selectedRowInColumn: 0];
 		id autoconnect;
+		id ssl;
 		
 		NSMutableArray *array;
 		id newOne;
@@ -525,7 +527,16 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 		{
 			autoconnect = @"NO";
 		}
-		
+
+		if ([[editor sslButton] state] == NSOnState)
+		{
+			ssl = @"YES";
+		}
+		else
+		{
+			ssl = @"NO";
+		}
+
 		array = [[prefs objectAtIndex: first] objectForKey: ServerListInfoEntries];
 				
 		if (wasEditing != -1 && wasEditing < (int)[array count])
@@ -540,6 +551,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 			[newOne setObject: port forKey: ServerListInfoPort];
 			[newOne setObject: string forKey: ServerListInfoName];
 			[newOne setObject: autoconnect forKey: ServerListInfoAutoConnect];
+			[newOne setObject: ssl forKey: ServerListInfoSSL];
 			[array replaceObjectAtIndex: wasEditing withObject: newOne];
 		}
 		else
@@ -554,6 +566,7 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 			 port, ServerListInfoPort,
 			 string, ServerListInfoName,
 			 autoconnect, ServerListInfoAutoConnect,
+			 ssl, ServerListInfoSSL,
 			 nil];
 			[array addObject: newOne];
 		}
@@ -671,6 +684,14 @@ static void reload_column(NSBrowser *browse, NSInteger col)
 		else
 		{
 			[[editor connectButton] setState: NSOffState];
+		}
+		if ([[o objectForKey: ServerListInfoSSL] isEqualToString: @"YES"])
+		{
+			[[editor sslButton] setState: NSOnState];
+		}
+		else
+		{
+			[[editor sslButton] setState: NSOffState];
 		}
 		
 		wasEditing = row;

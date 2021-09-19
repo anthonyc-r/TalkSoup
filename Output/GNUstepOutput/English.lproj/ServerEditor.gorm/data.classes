@@ -2,6 +2,7 @@
     "## Comment" = "Do NOT change this file, Gorm maintains it";
     FirstResponder = {
 	Actions = (
+	    "setSSL:",
 	    "orderFrontFontPanel:"
 	);
 	Super = NSObject;
@@ -16,7 +17,8 @@
 	    "setPassword:",
 	    "setReal:",
 	    "setNick:",
-	    "setEntry:"
+	    "setEntry:",
+	    "setSSL:"
 	);
 	Outlets = (
 	    connectButton,
@@ -31,7 +33,8 @@
 	    entryField,
 	    window,
 	    nickField,
-	    commandsText
+	    commandsText,
+	    sslButton
 	);
 	Super = NSObject;
     };

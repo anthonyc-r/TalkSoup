@@ -24,6 +24,7 @@
 #import "Controllers/ContentControllers/Tab/TabMasterController.h"
 #import "Controllers/ContentControllers/ContentController.h"
 #import "Controllers/TopicInspectorController.h"
+#import "Controllers/ServerListController.h"
 #import "Controllers/InputController.h"
 #import "Views/ScrollingTextView.h"
 #import "Models/Channel.h"
@@ -94,6 +95,8 @@ static NSString *dns_helper = @"dns_helper";
 	userName = [[aDict objectForKey: IRCDefaultsUserName] retain];
 	realName = [[aDict objectForKey: IRCDefaultsRealName] retain];
 	password = [[aDict objectForKey: IRCDefaultsPassword] retain];
+	useSSL = [[aDict objectForKey: ServerListInfoSSL] boolValue];
+
 	
 	if (!aContent)
 	{
@@ -347,13 +350,25 @@ static NSString *dns_helper = @"dns_helper";
 	
 	[_GS_ waitingForConnection: ident
 	  onConnectionController: self];
-	  
-	[[_TS_ pluginForInput] initiateConnectionToHost: aHost onPort: typedPort 
-	  withTimeout: 30 withNickname: preNick 
-	  withUserName: userName withRealName: realName 
-	  withPassword: password 
-	  withIdentification: ident];
-	
+ SEL sslSelector = @selector(initiateConnectionToHost:onPort:withTimeout:withNickname:withUserName:withRealName:withPassword:withIdentification:withSSL:);
+	if ([[_TS_ pluginForInput] respondsToSelector: sslSelector])
+ {
+		[[_TS_ pluginForInput] initiateConnectionToHost: aHost onPort: typedPort 
+	  	withTimeout: 30 withNickname: preNick 
+	  	withUserName: userName withRealName: realName 
+	  	withPassword: password 
+	  	withIdentification: ident
+	  	withSSL: useSSL];
+ }
+ else
+ {
+		[[_TS_ pluginForInput] initiateConnectionToHost: aHost onPort: typedPort 
+	  	withTimeout: 30 withNickname: preNick 
+	  	withUserName: userName withRealName: realName 
+	  	withPassword: password 
+	  	withIdentification: ident];
+ }
+
 	[content setLabel: S2AS(_l(@"Connecting")) 
 	  forName: ContentConsoleName];
 	[content setTitle: [NSString stringWithFormat: 
