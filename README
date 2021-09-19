@@ -2,6 +2,9 @@ About this fork:
 Adds a libircclient based Input module. The advantage of this over the current netclasses module being SSL support.
 Version 1.1 taken from: http://www.nongnu.org/gap/talksoup/index.html.
 
+Note on SSL Support:
+Upstream source for libircclient currently has broken SSL support due to an incorrect error check. Check the gentoo patches for the fix for this, basically just involves removing the check when setting SSLv2 not enabled. (This is default in recent versions of openssl).
+
 ORIGINAL README:
 
 TalkSoup is a fully-featured IRC client written with the GNUstep framework
