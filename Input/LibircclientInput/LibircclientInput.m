@@ -15,7 +15,7 @@
 
 #import <TalkSoupBundles/TalkSoup.h>
 #import <Foundation/Foundation.h>
-#import <libircclient.h>
+#import <llibircclient.h>
 #import "LibircclientInput.h"
 #import "LibircclientConnection.h"
 #import "LibircclientCallbacks.h"
@@ -81,8 +81,8 @@
     withControl: self];
   AUTORELEASE(con);
   NSString *addr = [aHost address];
-  BOOL connectionBad = irc_connect(irc_session, [addr UTF8String], aPort, 0, 
-    [nickname UTF8String], [user UTF8String], [realName UTF8String]);
+  BOOL connectionBad = irc_connect(irc_session, [addr UTF8String], aPort,
+    [password UTF8String], [nickname UTF8String], [user UTF8String], [realName UTF8String]);
   if (connectionBad) 
   {
     NSLog(@"irc_connect failed: %s", 
